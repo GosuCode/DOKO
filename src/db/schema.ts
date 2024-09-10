@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core"
 import type { AdapterAccountType } from "next-auth/adapters"
 
-export const users = pgTable("user", {
+export const users = pgTable("an_user", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
@@ -20,7 +20,7 @@ export const users = pgTable("user", {
 })
  
 export const accounts = pgTable(
-  "account",
+  "an_account",
   {
     userId: text("userId")
       .notNull()
@@ -43,7 +43,7 @@ export const accounts = pgTable(
   })
 )
  
-export const sessions = pgTable("session", {
+export const sessions = pgTable("an_session", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
@@ -52,7 +52,7 @@ export const sessions = pgTable("session", {
 })
  
 export const verificationTokens = pgTable(
-  "verificationToken",
+  "an_verificationToken",
   {
     identifier: text("identifier").notNull(),
     token: text("token").notNull(),
@@ -66,7 +66,7 @@ export const verificationTokens = pgTable(
 )
  
 export const authenticators = pgTable(
-  "authenticator",
+  "an_authenticator",
   {
     credentialID: text("credentialID").notNull().unique(),
     userId: text("userId")
