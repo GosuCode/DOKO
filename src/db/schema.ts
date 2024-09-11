@@ -86,6 +86,10 @@ export const authenticators = pgTable(
   })
 )
 
-export const variable_name = pgTable("table_name", {
+export const products = pgTable("an_product", {
   id: serial ("id").primaryKey(),
+  userId: text("userId")
+  .notNull()
+  .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
 })

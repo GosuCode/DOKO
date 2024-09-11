@@ -20,7 +20,14 @@ const Header = async () => {
             <Link href="/" className="hover:underline flex items-center gap-1">
               All Products
             </Link>
+            <Link
+              href={"/product/create"}
+              className="hover:underline flex items-center gap-1"
+            >
+              Add Product
+            </Link>
           </div>
+
           <section className="flex items-center gap-6">
             <div>{session?.user?.name}</div>
             <div>{session ? <SignOut /> : <SignIn />}</div>
