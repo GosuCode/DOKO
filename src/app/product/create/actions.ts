@@ -5,9 +5,9 @@ import { products } from "@/db/schema"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 
-export async function createProductAction(formData: FormData){
+export async function createProductAction(formData: FormData, resource: string){
     const session = await auth()
-
+    
     if(!session){
         throw new Error("Unauthorized")
     }
@@ -17,10 +17,16 @@ export async function createProductAction(formData: FormData){
     if(!user || !user.id){
         throw new Error("Unauthorized")
     }
+    const rawFormData = {
+        userId: user.id,
+        name: formData.get("name"),
+        public_id: resource,
+    }
 
     await database.insert(products).values({
-        name: formData.get("name") as string,
-        userId: user.id,
+        name: rawFormData.name as string,
+        userId: rawFormData.userId,
+        public_id: rawFormData.public_id as string,
     })
     redirect("/")
 }

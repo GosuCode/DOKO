@@ -92,4 +92,5 @@ export const products = pgTable("an_product", {
   .notNull()
   .references(() => users.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
+  public_id: text("public_id").notNull(),
 })
