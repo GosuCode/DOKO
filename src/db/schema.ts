@@ -94,6 +94,7 @@ export const products = pgTable("an_product", {
   name: text("name").notNull(),
   image: text("image").notNull(),
   price: integer("price").notNull(),
+  description: text("description").notNull(),
   quantity: integer("quantity").notNull(),
   avgRating: integer("avgRating"),
   availability: text("availability"),
