@@ -24,9 +24,8 @@ const CreateProduct = () => {
       <h1>List your product</h1>
 
       <form action={handleSubmit}>
-        {/* <UploadImage /> */}
         <CldUploadWidget
-          uploadPreset="asefjpje"
+          uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
           onSuccess={(result) => {
             if (
               typeof result.info === "object" &&
@@ -62,6 +61,20 @@ const CreateProduct = () => {
           required
           autoComplete="off"
         />
+        <Input
+          name="description"
+          placeholder="Description"
+          required
+          autoComplete="off"
+        />
+        <Input name="price" placeholder="Price" required autoComplete="off" />
+        <Input
+          name="quantity"
+          placeholder="Quantity"
+          required
+          autoComplete="off"
+        />
+
         <Button type="submit">Submit</Button>
       </form>
     </main>

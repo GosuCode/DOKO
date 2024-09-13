@@ -20,13 +20,23 @@ export async function createProductAction(formData: FormData, resource: string){
     const rawFormData = {
         userId: user.id,
         name: formData.get("name"),
-        public_id: resource,
+        image: resource,
+        price: formData.get("price"),
+        quantity: formData.get("quantity"),
+        avgRating: formData.get("avgRating"),
+        availability: formData.get("availability"),
+        discount: formData.get("discount"),
     }
 
     await database.insert(products).values({
         name: rawFormData.name as string,
         userId: rawFormData.userId,
-        public_id: rawFormData.public_id as string,
+        image: rawFormData.image as string,
+        price: rawFormData.price as unknown as number,
+        quantity: rawFormData.quantity as unknown as number,
+        avgRating: rawFormData.avgRating as unknown as number,
+        availability: rawFormData.availability as string,
+        discount: rawFormData.discount as unknown as number,
     })
     redirect("/")
 }

@@ -92,5 +92,10 @@ export const products = pgTable("an_product", {
   .notNull()
   .references(() => users.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
-  public_id: text("public_id").notNull(),
+  image: text("image").notNull(),
+  price: integer("price").notNull(),
+  quantity: integer("quantity").notNull(),
+  avgRating: integer("avgRating"),
+  availability: text("availability"),
+  discount: integer("discount"),
 })

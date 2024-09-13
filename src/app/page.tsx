@@ -10,7 +10,9 @@ export default async function Home() {
       {allProducts.map((product) => (
         <div key={product.id}>
           {product.name}
-          <DisplayImage public_id={product.public_id} />
+          <DisplayImage public_id={product.image} />
+          <p>{product.price}</p>
+          <p>{product.quantity}</p>
         </div>
       ))}
     </section>
