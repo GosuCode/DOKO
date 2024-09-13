@@ -99,3 +99,5 @@ export const products = pgTable("an_product", {
   availability: text("availability"),
   discount: integer("discount"),
 })
+
+export type ANProduct = typeof products.$inferSelect;

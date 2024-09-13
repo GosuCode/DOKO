@@ -1,20 +1,9 @@
-import DisplayImage from "@/components/display-image";
-import { database } from "@/db/database";
-import { products } from "@/db/schema";
+import ProductList from "./product/product-list/page";
 
 export default async function Home() {
-  const allProducts = await database.select().from(products);
-
   return (
-    <section>
-      {allProducts.map((product) => (
-        <div key={product.id}>
-          {product.name}
-          <DisplayImage public_id={product.image} />
-          <p>{product.price}</p>
-          <p>{product.quantity}</p>
-        </div>
-      ))}
-    </section>
+    <main>
+      <ProductList />
+    </main>
   );
 }

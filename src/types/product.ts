@@ -1,4 +1,4 @@
-export type Product = {
+export type TProduct = {
     id: number;
     userId: string;
     image: string;
@@ -7,9 +7,9 @@ export type Product = {
     quantity: number;
     productCategory?: string;
     description?: string;
-    avgRating?: number;
-    availability?: 'inStock' | 'outOfStock';
-    discount?: number;
+    // avgRating?: number;
+    // availability?: 'inStock' | 'outOfStock';
+    // discount?: number;
 }
 
 // export type ProductCategory = {
