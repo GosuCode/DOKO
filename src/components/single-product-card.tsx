@@ -25,7 +25,7 @@ const SingleProductCard = ({ product }: { product: ANProduct }) => {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <p>{product.price > 0 ? "Available" : "Sold"}</p>
-        <p>Rs.{product.quantity}</p>
+        <p>Rs.{product.price}</p>
       </CardFooter>
     </Card>
   );

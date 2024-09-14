@@ -6,8 +6,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DisplayImage from "@/components/display-image";
-import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import QuantityInput from "@/components/quantity-input";
 const ProductById = async ({
   params: { productId },
 }: {
@@ -46,16 +46,7 @@ const ProductById = async ({
               <div>
                 Rs.<span className="font-bold">{product.price}</span>
               </div>
-              <div className="flex items-center gap-2">
-                Quantity
-                <Button>-</Button>
-                <Input type="number" max={10} min={1} defaultValue={1} />
-                <Button>+</Button>
-              </div>
-              <div className="flex justify-between">
-                <Button className="w-full">Buy Now</Button>
-                <Button className="w-full">Add to Cart</Button>
-              </div>
+              <QuantityInput productId={parseInt(productId)} />
             </div>
           </div>
         </div>

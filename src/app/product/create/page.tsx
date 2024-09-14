@@ -20,32 +20,34 @@ const CreateProduct = () => {
   };
 
   return (
-    <main>
+    <main className="h-screen">
       <h1>List your product</h1>
 
-      <form action={handleSubmit}>
-        <CldUploadWidget
-          uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
-          onSuccess={(result) => {
-            if (
-              typeof result.info === "object" &&
-              "secure_url" in result.info
-            ) {
-              setResource(result.info.public_id);
-            }
-          }}
-          options={{
-            singleUploadAutoClose: true,
-          }}
-        >
-          {({ open }) => {
-            return (
-              <Button onClick={() => open()}>
-                {resource ? "Update Image" : "Upload an Image"}
-              </Button>
-            );
-          }}
-        </CldUploadWidget>
+      <form action={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <CldUploadWidget
+            uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
+            onSuccess={(result) => {
+              if (
+                typeof result.info === "object" &&
+                "secure_url" in result.info
+              ) {
+                setResource(result.info.public_id);
+              }
+            }}
+            options={{
+              singleUploadAutoClose: true,
+            }}
+          >
+            {({ open }) => {
+              return (
+                <Button onClick={() => open()}>
+                  {resource ? "Update Image" : "Upload an Image"}
+                </Button>
+              );
+            }}
+          </CldUploadWidget>
+        </div>
 
         {resource && (
           <CldImage

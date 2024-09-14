@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import SignIn from "@/components/sign-in";
 import { SignOut } from "@/components/sign-out";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,6 +33,9 @@ const Header = async () => {
               className="hover:underline flex items-center gap-1"
             >
               Your Product
+            </Link>
+            <Link href={"/product/cart"}>
+              <ShoppingCart />
             </Link>
           </div>
 

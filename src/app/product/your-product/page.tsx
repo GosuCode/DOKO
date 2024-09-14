@@ -16,7 +16,7 @@ import {
 const YourProduct = async () => {
   const session = await auth();
   if (!session || !session.user) {
-    throw new Error("Unauthorized");
+    return <div>Unauthorized</div>;
   }
   const yourProducts = await database.query.products.findMany({
     where: eq(products.userId, session.user.id!),

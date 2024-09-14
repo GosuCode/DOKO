@@ -101,4 +101,16 @@ export const products = pgTable("an_product", {
   discount: integer("discount"),
 })
 
+export const cart = pgTable("an_cart", {
+  id: serial("id").primaryKey(),
+  userId: text("userId")
+  .notNull()
+  .references(() => users.id, { onDelete: "cascade" }),
+  productId: integer("productId")
+  .notNull()
+  .references(() => products.id, { onDelete: "cascade" }),
+  quantity: integer("quantity").notNull()
+})
+
 export type ANProduct = typeof products.$inferSelect;
+export type ANCart = typeof cart.$inferSelect;
