@@ -8,6 +8,7 @@ import Link from "next/link";
 import DisplayImage from "@/components/display-image";
 import { Card } from "@/components/ui/card";
 import QuantityInput from "@/components/quantity-input";
+
 const ProductById = async ({
   params: { productId },
 }: {

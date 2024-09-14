@@ -1,10 +1,9 @@
 import React from "react";
-import { database } from "@/db/database";
-import { products } from "@/db/schema";
 import SingleProductCard from "@/components/single-product-card";
+import { getProducts } from "./actions";
 
 const ProductList = async () => {
-  const allProducts = await database.select().from(products);
+  const allProducts = await getProducts();
   return (
     <div className="grid grid-cols-4 gap-4">
       {allProducts.map((product) => (

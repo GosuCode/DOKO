@@ -1,7 +1,3 @@
-import { auth } from "@/auth";
-import { ANCart, cart } from "@/db/schema";
-import { eq } from "drizzle-orm";
-import { database } from "@/db/database";
 import CartProduct from "@/components/cart-product";
 import {
   Table,
@@ -12,24 +8,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { showCartProducts } from "./actions";
 
 const Cart = async () => {
-  const session = await auth();
-
-  if (!session || !session.user) {
-    return <div>Unauthorized</div>;
-  }
-
-  let cartProducts: ANCart[] = [];
-
-  try {
-    cartProducts = await database.query.cart.findMany({
-      where: eq(cart.userId, session.user.id!),
-    });
-  } catch (error) {
-    console.error(error);
-  }
-
+  const cartProducts = await showCartProducts();
   return (
     <section className="grid grid-cols-12 space-x-4">
       <section className="col-span-8">
