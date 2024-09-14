@@ -5,7 +5,9 @@ import { database } from "@/db/database";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import SingleProductCard from "@/components/single-product-card";
+import DisplayImage from "@/components/display-image";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 const ProductById = async ({
   params: { productId },
 }: {
@@ -27,9 +29,42 @@ const ProductById = async ({
     );
   }
   return (
-    <div>
-      <SingleProductCard product={product} />
-    </div>
+    <main>
+      <Card className="grid grid-cols-3 space-x-4 justify-between max-h-[50vh]">
+        <div className="relative w-[400px] h-[400px] bg-slate-300">
+          <figure>
+            <DisplayImage public_id={product.image} />
+          </figure>
+        </div>
+        <div className="flex grid-cols-2 col-span-2 p-4">
+          <div className="flex flex-col gap-6">
+            <h1 className="text-2xl font-bold">{product.name}</h1>
+            <div className="text-xl space-y-4">
+              <div>
+                <span className="font-bold">{product.price}</span>
+              </div>
+              <div>
+                Rs.<span className="font-bold">{product.price}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                Quantity
+                <Button>-</Button>
+                <Input type="number" max={10} min={1} defaultValue={1} />
+                <Button>+</Button>
+              </div>
+              <div className="flex justify-between">
+                <Button className="w-full">Buy Now</Button>
+                <Button className="w-full">Add to Cart</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+      <div>
+        <h2 className="text-2xl font-bold">Description</h2>
+        <p>{product.description}</p>
+      </div>
+    </main>
   );
 };
 

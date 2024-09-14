@@ -17,7 +17,7 @@ const YourProduct = async () => {
 
   const hasItems = yourProducts.length > 0;
   return (
-    <>
+    <div className="container grid grid-cols-4 gap-4">
       {hasItems ? (
         yourProducts.map((product) => (
           <YourProductComponent key={product.id} product={product} />
@@ -25,7 +25,7 @@ const YourProduct = async () => {
       ) : (
         <EmptyState />
       )}
-    </>
+    </div>
   );
 };
 
