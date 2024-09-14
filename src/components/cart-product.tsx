@@ -3,7 +3,6 @@ import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { ANCart, ANProduct, products } from "@/db/schema";
 import { Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import DisplayImage from "./display-image";
 import { database } from "@/db/database";
 import { eq } from "drizzle-orm";

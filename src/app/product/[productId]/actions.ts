@@ -4,6 +4,7 @@ import { auth } from "@/auth"
 import { database } from "@/db/database"
 import { cart, products } from "@/db/schema"
 import { eq } from "drizzle-orm"
+import { revalidatePath } from "next/cache"
 
 export async function createCartAction(productId: number, formData: FormData) {
   const session = await auth()
@@ -24,19 +25,15 @@ export async function createCartAction(productId: number, formData: FormData) {
     throw new Error("Invalid quantity")
   }
 
-  const cartItem = await database.insert(cart).values({
+  await database.insert(cart).values({
     userId: session.user.id,
     productId,
     quantity,
   })
 
-  if (!cartItem || cartItem.length === 0) {
-    throw new Error("Failed to add item to cart")
-  }
-
   await database.update(products).set({
     quantity: product.quantity - quantity,
   }).where(eq(products.id, productId))
   
-
+  revalidatePath(`/product/${productId}`)
 }
