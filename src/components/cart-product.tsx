@@ -33,7 +33,7 @@ const CartProduct = async ({ cartProduct }: { cartProduct: ANCart }) => {
           </TableCell>
           <TableCell>
             <Button variant="destructive">
-              <Trash2 />
+              <Trash2 size={16} />
             </Button>
           </TableCell>
         </TableRow>

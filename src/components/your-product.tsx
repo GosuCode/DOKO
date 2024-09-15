@@ -20,10 +20,10 @@ const YourProductComponent = ({ product }: { product: ANProduct }) => {
           <TableCell>{product.quantity}</TableCell>
           <TableCell className="flex space-x-2">
             <Button variant="outline">
-              <Edit2Icon />
+              <Edit2Icon size={16} />
             </Button>
             <Button variant="destructive">
-              <Trash />
+              <Trash size={16} />
             </Button>
           </TableCell>
         </TableRow>

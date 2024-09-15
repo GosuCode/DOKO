@@ -12,19 +12,18 @@ import Link from "next/link";
 
 const SingleProductCard = ({ product }: { product: ANProduct }) => {
   return (
-    <Card>
+    <Card className="flex flex-col items-center">
       <CardHeader>
-        <CardTitle>
-          <Link href={`/product/${product.id}`}>{product.name}</Link>
+        <CardTitle className="container relative w-[160px] h-[128px]">
+          <Link href={`/product/${product.id}`}>
+            <DisplayImage public_id={product.image} />
+          </Link>
         </CardTitle>
       </CardHeader>
-      <CardContent className="relative w-full h-[160px]">
-        <Link href={`/product/${product.id}`}>
-          <DisplayImage public_id={product.image} />
-        </Link>
+      <CardContent>
+        <Link href={`/product/${product.id}`}>{product.name}</Link>
       </CardContent>
-      <CardFooter className="flex justify-between items-center">
-        <p>{product.price > 0 ? "Available" : "Sold"}</p>
+      <CardFooter className="flex justify-between items-start">
         <p>Rs.{product.price}</p>
       </CardFooter>
     </Card>
