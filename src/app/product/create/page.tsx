@@ -71,6 +71,12 @@ const CreateProduct = () => {
         />
         <Input name="price" placeholder="Price" required autoComplete="off" />
         <Input
+          name="shipping_cost"
+          placeholder="Shipping Cost"
+          autoComplete="off"
+        />
+        <Input name="discount" placeholder="Discount" autoComplete="off" />
+        <Input
           name="quantity"
           placeholder="Quantity"
           required

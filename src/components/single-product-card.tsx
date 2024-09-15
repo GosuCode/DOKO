@@ -16,7 +16,7 @@ const SingleProductCard = ({ product }: { product: ANProduct }) => {
       <CardHeader>
         <CardTitle className="container relative w-[160px] h-[128px]">
           <Link href={`/product/${product.id}`}>
-            <DisplayImage public_id={product.image} />
+            <DisplayImage public_id={product.image} alt={product.name} />
           </Link>
         </CardTitle>
       </CardHeader>

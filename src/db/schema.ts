@@ -99,6 +99,9 @@ export const products = pgTable("an_product", {
   avgRating: integer("avgRating"),
   availability: text("availability"),
   discount: integer("discount"),
+  // shipping_cost: integer("shipping_cost").notNull(), // add later
+  // createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  // updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
 })
 
 export const cart = pgTable("an_cart", {
@@ -109,7 +112,7 @@ export const cart = pgTable("an_cart", {
   productId: integer("productId")
   .notNull()
   .references(() => products.id, { onDelete: "cascade" }),
-  quantity: integer("quantity").notNull()
+  quantity: integer("quantity").notNull(),
 })
 
 export type ANProduct = typeof products.$inferSelect;

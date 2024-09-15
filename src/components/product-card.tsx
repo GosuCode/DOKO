@@ -14,7 +14,7 @@ function ProductCard({ product }: { product: ANProduct }) {
     <Link href={`/product/${product.id}`} passHref>
       <section className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
         <figure className="h-72 border-b-2 border-palette-lighter relative">
-          <DisplayImage public_id={image_public_id} />
+          <DisplayImage public_id={image_public_id} alt={product.name} />
         </figure>
         <div className="h-48 relative">
           <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold text-purple-800 line-clamp-1">
@@ -27,16 +27,16 @@ function ProductCard({ product }: { product: ANProduct }) {
             Free Shipping
           </span>
           <div className="ml-4 space-x-2">
-            <span className="line-through">
-              Rs.{getDiscountedPrice(price, 60)}
-            </span>
+            <span className="line-through">Rs.{price}</span>
             <span className="text-sm">(60% off)</span>
           </div>
           <div
             className="text-palette-dark font-primary font-medium text-base absolute bottom-0 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
             rounded-tl-sm triangle"
           >
-            <span className="text-purple-800">Rs.{price}</span>
+            <span className="text-purple-800">
+              Rs.{getDiscountedPrice(price, 60)}
+            </span>
           </div>
         </div>
       </section>

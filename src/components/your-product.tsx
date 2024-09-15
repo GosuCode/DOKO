@@ -12,7 +12,7 @@ const YourProductComponent = ({ product }: { product: ANProduct }) => {
       <TableBody>
         <TableRow>
           <TableCell className="font-medium relative w-[40px] h-[40px]">
-            <DisplayImage public_id={product.image} />
+            <DisplayImage public_id={product.image} alt={product.name} />
           </TableCell>
           <TableCell>{product.name}</TableCell>
           <TableCell>{product.description}</TableCell>
