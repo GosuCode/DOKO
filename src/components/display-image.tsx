@@ -2,10 +2,20 @@
 
 import { CldImage } from "next-cloudinary";
 
-export default function DisplayImage({ public_id }: { public_id: string }) {
+type DisplayImageProps = {
+  public_id: string;
+  alt: string;
+};
+
+export default function DisplayImage({ public_id, alt }: DisplayImageProps) {
   return (
     <figure>
-      <CldImage src={public_id} alt="Description of my image" fill />
+      <CldImage
+        src={public_id}
+        alt={alt}
+        fill
+        className="transform duration-500 ease-in-out hover:scale-105"
+      />
     </figure>
   );
 }
