@@ -1,5 +1,5 @@
+import { relations } from "drizzle-orm"
 import {
-  boolean,
   timestamp,
   pgTable,
   text,
@@ -64,27 +64,6 @@ export const verificationTokens = pgTable(
     }),
   })
 )
- 
-export const authenticators = pgTable(
-  "an_authenticator",
-  {
-    credentialID: text("credentialID").notNull().unique(),
-    userId: text("userId")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    providerAccountId: text("providerAccountId").notNull(),
-    credentialPublicKey: text("credentialPublicKey").notNull(),
-    counter: integer("counter").notNull(),
-    credentialDeviceType: text("credentialDeviceType").notNull(),
-    credentialBackedUp: boolean("credentialBackedUp").notNull(),
-    transports: text("transports"),
-  },
-  (authenticator) => ({
-    compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialID],
-    }),
-  })
-)
 
 export const products = pgTable("an_product", {
   id: serial ("id").primaryKey(),
@@ -113,7 +92,15 @@ export const cart = pgTable("an_cart", {
   .notNull()
   .references(() => products.id, { onDelete: "cascade" }),
   quantity: integer("quantity").notNull(),
+  subtotal: integer("subtotal").notNull(),
 })
+
+export const cartRelations = relations(cart, ({ one }) => ({
+  products: one(products, {
+    fields: [cart.productId],
+    references: [products.id],
+  }),
+}));
 
 export type ANProduct = typeof products.$inferSelect;
 export type ANCart = typeof cart.$inferSelect;

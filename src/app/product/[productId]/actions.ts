@@ -29,6 +29,7 @@ export async function createCartAction(productId: number, formData: FormData) {
     userId: session.user.id,
     productId,
     quantity,
+    subtotal: product.price * quantity,
   })
 
   await database.update(products).set({
