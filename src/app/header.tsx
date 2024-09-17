@@ -19,7 +19,10 @@ const Header = async () => {
           </Link>
 
           <div className="flex items-center gap-8">
-            <Link href="/" className="hover:underline flex items-center gap-1">
+            <Link
+              href="/product/product-list"
+              className="hover:underline flex items-center gap-1"
+            >
               All Products
             </Link>
             <Link
