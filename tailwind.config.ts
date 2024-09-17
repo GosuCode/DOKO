@@ -57,9 +57,6 @@ const config: Config = {
 				dark: '#4C1D95',
 			},
   		},
-		  fontFamily: {
-			primary: ['"Josefin Sans"']
-		  },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

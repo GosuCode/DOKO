@@ -75,10 +75,9 @@ export const products = pgTable("an_product", {
   price: integer("price").notNull(),
   description: text("description").notNull(),
   quantity: integer("quantity").notNull(),
-  avgRating: integer("avgRating"),
-  availability: text("availability"),
-  discount: integer("discount"),
-  // shipping_cost: integer("shipping_cost").notNull(), // add later
+  avgRating: integer("avgRating").default(0),
+  availability: text("availability").default("In Stock"),
+  discount: integer("discount").default(0).notNull(),
   // createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
   // updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
 })
