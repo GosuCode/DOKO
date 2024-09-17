@@ -15,27 +15,31 @@ const YourProductComponent = ({ product }: { product: ANProduct }) => {
     <>
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium relative w-[40px] h-[40px]">
-            <DisplayImage public_id={product.image} alt={product.name} />
+          <TableCell>
+            <div className="relative w-[120px] h-[120px]">
+              <DisplayImage public_id={product.image} alt={product.name} />
+            </div>
           </TableCell>
           <TableCell>{product.name}</TableCell>
           <TableCell>{product.description}</TableCell>
           <TableCell>Rs.{product.price}</TableCell>
           <TableCell>{product.quantity}</TableCell>
-          <TableCell className="flex space-x-2">
-            <Button variant="outline" asChild>
-              <Link href={`/product/your-product/${product.id}`}>
-                <Edit2Icon size={16} />
-              </Link>
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => {
-                deleteProductAction(product.id);
-              }}
-            >
-              <Trash size={16} />
-            </Button>
+          <TableCell>
+            <div className="flex space-x-2 items-center">
+              <Button variant="outline" asChild>
+                <Link href={`/product/your-product/${product.id}`}>
+                  <Edit2Icon size={16} />
+                </Link>
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  deleteProductAction(product.id);
+                }}
+              >
+                <Trash size={16} />
+              </Button>
+            </div>
           </TableCell>
         </TableRow>
       </TableBody>
