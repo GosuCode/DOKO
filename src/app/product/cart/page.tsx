@@ -11,7 +11,7 @@ async function CartPage() {
     <div className="container mx-auto mb-20 min-h-screen">
       <PageTitle text="Your Cart" />
       <CartTable cart={cartProducts} />
-      <div className="max-w-sm mx-auto space-y-4 px-2">
+      <div className="max-w-sm mx-auto space-y-4 px-2 flex flex-col space-x-2">
         <CheckOutButton />
         <BackToProductButton />
       </div>
