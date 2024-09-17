@@ -6,6 +6,7 @@ import { createProductAction } from "@/app/product/create/actions";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 import { Textarea } from "./ui/textarea";
+import { Card } from "./ui/card";
 
 export default function CreateProduct() {
   const [resource, setResource] = useState("");
@@ -19,7 +20,7 @@ export default function CreateProduct() {
     }
   };
   return (
-    <>
+    <Card className="px-10 py-4 mt-4">
       <form action={handleSubmit} className="flex flex-col gap-4 mt-10">
         <div>
           <CldUploadWidget
@@ -77,6 +78,6 @@ export default function CreateProduct() {
 
         <Button type="submit">Submit</Button>
       </form>
-    </>
+    </Card>
   );
 }

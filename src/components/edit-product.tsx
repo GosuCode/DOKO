@@ -7,6 +7,7 @@ import { CldImage } from "next-cloudinary";
 import { CldUploadWidget } from "next-cloudinary";
 import { updateProductAction } from "@/app/product/your-product/actions";
 import { ANProduct } from "@/db/schema";
+import { Textarea } from "./ui/textarea";
 
 type EditProductProps = {
   productId: number;
@@ -72,14 +73,6 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
           autoComplete="off"
           defaultValue={product.name}
         />
-        <label htmlFor="description">Product Description</label>
-        <Input
-          name="description"
-          placeholder="Description"
-          required
-          autoComplete="off"
-          defaultValue={product.description}
-        />
         <label htmlFor="price">Price</label>
         <Input
           name="price"
@@ -102,6 +95,14 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
           required
           autoComplete="off"
           defaultValue={product.quantity}
+        />
+        <label htmlFor="description">Product Description</label>
+        <Textarea
+          name="description"
+          placeholder="Description"
+          required
+          autoComplete="off"
+          defaultValue={product.description}
         />
 
         <Button type="submit">Submit</Button>

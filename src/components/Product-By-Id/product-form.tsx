@@ -28,7 +28,7 @@ function ProductForm({ productId }: { productId: number }) {
           />
         </div>
       </div>
-      <Button className="w-full" aria-label="cart-button">
+      <Button className="w-full mt-4" aria-label="cart-button">
         Add To Cart
         <ShoppingCart className="w-5 ml-2" />
       </Button>

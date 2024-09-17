@@ -45,13 +45,15 @@ function CartTable({ cart }: { cart: ANCart[] }) {
                   className={`hidden sm:inline-flex`}
                 /> */}
                 <figure className="relative h-20 w-20">
-                  <DisplayImage
-                    public_id={item.products.image}
-                    alt={item.products.name}
-                  />
+                  <Link href={`/product/${item.productId}`}>
+                    <DisplayImage
+                      public_id={item.products.image}
+                      alt={item.products.name}
+                    />
+                  </Link>
                 </figure>
                 <Link
-                  href={`/products/${item.productId}`}
+                  href={`/product/${item.productId}`}
                   className="pt-1 hover:text-palette-dark"
                 >
                   {/* {item.productTitle}, {item.variantTitle} */}
