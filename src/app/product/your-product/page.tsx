@@ -24,7 +24,7 @@ const YourProduct = async () => {
 
   const hasItems = yourProducts.length > 0;
   return (
-    <div className="container">
+    <div className="container h-screen">
       {hasItems ? (
         <Table>
           <TableCaption>List of your products</TableCaption>
