@@ -1,12 +1,14 @@
+"use client";
+
 import { X } from "lucide-react";
 import Link from "next/link";
-import { getCartSubTotal } from "@/utils/getCartSubTotals";
 import { ANCart } from "@/db/schema";
 import DisplayImage from "../display-image";
 import { Input } from "../ui/input";
 import { getDiscountedPrice } from "@/utils/getDiscountedPrice";
+import { removeProductFromCart } from "@/app/product/cart/actions";
 
-async function CartTable({ cart }: { cart: ANCart[] }) {
+function CartTable({ cart }: { cart: ANCart[] }) {
   const cartItems = cart.map((item: ANCart) => ({
     ...item,
   }));
@@ -77,7 +79,10 @@ async function CartTable({ cart }: { cart: ANCart[] }) {
                 </span>
               </td>
               <td className="font-primary font-medium px-4 sm:px-6 py-4">
-                <button aria-label="delete-item">
+                <button
+                  aria-label="delete-item"
+                  onClick={() => removeProductFromCart(item.productId)}
+                >
                   <X className="w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter" />
                 </button>
               </td>
