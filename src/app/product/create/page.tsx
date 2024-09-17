@@ -21,9 +21,11 @@ const CreateProduct = () => {
 
   return (
     <main className="h-screen">
-      <h1>List your product</h1>
+      <h1 className="text-2xl font-bold text-center underline">
+        List your product
+      </h1>
 
-      <form action={handleSubmit} className="flex flex-col gap-4">
+      <form action={handleSubmit} className="flex flex-col gap-4 mt-10">
         <div>
           <CldUploadWidget
             uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
@@ -70,11 +72,6 @@ const CreateProduct = () => {
           autoComplete="off"
         />
         <Input name="price" placeholder="Price" required autoComplete="off" />
-        <Input
-          name="shipping_cost"
-          placeholder="Shipping Cost"
-          autoComplete="off"
-        />
         <Input name="discount" placeholder="Discount" autoComplete="off" />
         <Input
           name="quantity"

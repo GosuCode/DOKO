@@ -10,7 +10,10 @@ async function CartTable({ cart }: { cart: ANCart[] }) {
   const cartItems = cart.map((item: ANCart) => ({
     ...item,
   }));
-  const subtotal = getCartSubTotal(cartItems);
+  const subtotal = cartItems.reduce((total, item) => {
+    const itemPrice = getDiscountedPrice(item.products.price, 60);
+    return total + itemPrice * item.quantity;
+  }, 0);
 
   return (
     <div className="min-h-80 max-w-2xl my-4 sm:my-8 mx-auto w-full">
@@ -87,7 +90,7 @@ async function CartTable({ cart }: { cart: ANCart[] }) {
                 Subtotal
               </td>
               <td className="font-primary text-lg text-palette-primary font-medium px-4 sm:px-6 py-4">
-                <span className="text-xl">{subtotal}</span>
+                <span className="text-xl">Rs.{subtotal.toFixed(2)}</span>
               </td>
               <td></td>
             </tr>

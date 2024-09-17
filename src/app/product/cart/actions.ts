@@ -12,7 +12,7 @@ export async function showCartProducts() {
     throw new Error("Unauthorized")
   }
 
-  let cartProducts: (ANCart & { products: ANProduct });
+  let cartProducts: (ANCart & { products: ANProduct })[];
 
     cartProducts = await database.query.cart.findMany({
       where: eq(cart.userId, session.user.id!),
@@ -28,10 +28,6 @@ export async function showCartProducts() {
         },
       },
     });
-
-  console.log(
-    cartProducts.products
-  )
 
   return cartProducts;
 }
