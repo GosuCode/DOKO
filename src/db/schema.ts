@@ -78,8 +78,9 @@ export const products = pgTable("an_product", {
   avgRating: integer("avgRating").default(0),
   availability: text("availability").default("In Stock"),
   discount: integer("discount").default(0).notNull(),
-  // createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
-  // updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
+  categories: text("categories").notNull().default(""),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
 })
 
 export const cart = pgTable("an_cart", {

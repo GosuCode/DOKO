@@ -7,6 +7,7 @@ import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Card } from "./ui/card";
+import { SelectScrollable } from "./scrollable-select";
 
 export default function CreateProduct() {
   const [resource, setResource] = useState("");
@@ -73,6 +74,8 @@ export default function CreateProduct() {
           required
           autoComplete="off"
         />
+        <label htmlFor="categories">Categories</label>
+        <SelectScrollable name="categories" />
         <label htmlFor="description">Description</label>
         <Textarea name="description" placeholder="Description" required />
 

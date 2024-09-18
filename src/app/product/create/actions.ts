@@ -27,6 +27,7 @@ export async function createProductAction(formData: FormData, resource: string){
         avgRating: formData.get("avgRating"),
         availability: formData.get("availability"),
         discount: formData.get("discount"),
+        categories: formData.get("categories"),
     }
 
     await database.insert(products).values({
@@ -39,6 +40,7 @@ export async function createProductAction(formData: FormData, resource: string){
         avgRating: rawFormData.avgRating as unknown as number,
         availability: rawFormData.availability as string,
         discount: rawFormData.discount as unknown as number,
+        categories: rawFormData.categories as string,
     })
     redirect("/")
 }
