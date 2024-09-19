@@ -4,6 +4,7 @@ import { PieGraph } from "@/components/dashboard/charts/pie-graph";
 import PageContainer from "@/components/dashboard/layout/page-container";
 import { RecentSales } from "@/components/dashboard/recent-sales";
 // import { CalendarDateRangePicker } from "@/components/date-range-picker";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,9 +23,11 @@ export default function page() {
           <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome back 👋
           </h2>
-          <div className="hidden items-center space-x-2 md:flex">
+          <div className="hidden items-center space-x-1 md:flex">
             {/* <CalendarDateRangePicker /> */}
-            <Button>Download</Button>
+            <Button>
+              <Link href="/product/add-product">Add Product</Link>
+            </Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
