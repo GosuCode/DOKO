@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import ProfileDropdown from "@/app/profile-dropdown";
+import { ProfileDropdown } from "@/components/profile-dropdown";
 import SignIn from "@/components/sign-in";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
@@ -8,8 +8,6 @@ import Link from "next/link";
 
 const Header = async () => {
   const session = await auth();
-  const profileImage = session?.user?.image;
-  const userName = session?.user?.name;
   // Add icons before list
   return (
     <header className="fixed top-0 left-0 w-full py-2 flex bg-white justify-center z-50 h-16">
@@ -42,11 +40,7 @@ const Header = async () => {
                     <ShoppingCart size={28} />
                   </Link>
                 </Button>
-                <ProfileDropdown
-                  profileImage={profileImage as string}
-                  userName={userName as string}
-                  session={session}
-                />
+                <ProfileDropdown />
               </>
             ) : (
               ""

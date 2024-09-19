@@ -1,19 +1,17 @@
-import { AreaGraph } from "@/components/dashboard/charts/area-graph";
-import { BarGraph } from "@/components/dashboard/charts/bar-graph";
-import { PieGraph } from "@/components/dashboard/charts/pie-graph";
+// import { BarGraph } from "@/components/dashboard/charts/bar-graph";
+// import { RecentSales } from "@/components/dashboard/recent-sales";
 import PageContainer from "@/components/dashboard/layout/page-container";
-import { RecentSales } from "@/components/dashboard/recent-sales";
-// import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { User } from "@/components/user";
 
 export default function page() {
   return (
@@ -21,10 +19,9 @@ export default function page() {
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back 👋
+            Hi, <User /> 👋
           </h2>
           <div className="hidden items-center space-x-1 md:flex">
-            {/* <CalendarDateRangePicker /> */}
             <Button>
               <Link href="/product/add-product">Add Product</Link>
             </Button>
@@ -33,9 +30,7 @@ export default function page() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
-              Analytics
-            </TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -67,7 +62,7 @@ export default function page() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Subscriptions
+                    Followers
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +114,7 @@ export default function page() {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
                     Active Now
+                    {/* Product on sales */}
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +137,7 @@ export default function page() {
                 </CardContent>
               </Card>
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
+            {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
               <div className="col-span-4">
                 <BarGraph />
               </div>
@@ -156,13 +152,7 @@ export default function page() {
                   <RecentSales />
                 </CardContent>
               </Card>
-              <div className="col-span-4">
-                <AreaGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <PieGraph />
-              </div>
-            </div>
+            </div> */}
           </TabsContent>
         </Tabs>
       </div>
