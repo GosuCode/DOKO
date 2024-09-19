@@ -8,7 +8,7 @@ import DisplayImage from "./display-image";
 import { Button } from "./ui/button";
 import { Edit2Icon, Trash } from "lucide-react";
 import Link from "next/link";
-import { deleteProductAction } from "@/app/product/your-product/actions";
+import { deleteProductAction } from "@/app/dashboard/your-product/actions";
 
 const YourProductComponent = ({ product }: { product: ANProduct }) => {
   return (

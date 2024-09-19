@@ -10,7 +10,7 @@ const Header = async () => {
   const session = await auth();
   const profileImage = session?.user?.image;
   const userName = session?.user?.name;
-
+  // Add icons before list
   return (
     <header className="fixed top-0 left-0 w-full py-2 flex bg-white justify-center z-50 h-16">
       <nav className="container flex justify-between items-center">
@@ -26,19 +26,6 @@ const Header = async () => {
               className="hover:underline flex items-center gap-1"
             >
               All Products
-            </Link>
-            <Link
-              href={"/product/create"}
-              className="hover:underline flex items-center gap-1"
-            >
-              Add Product
-            </Link>
-
-            <Link
-              href={"/product/your-product"}
-              className="hover:underline flex items-center gap-1"
-            >
-              Your Product
             </Link>
           </div>
 
@@ -56,8 +43,8 @@ const Header = async () => {
                   </Link>
                 </Button>
                 <ProfileDropdown
-                  profileImage={profileImage}
-                  userName={userName}
+                  profileImage={profileImage as string}
+                  userName={userName as string}
                   session={session}
                 />
               </>

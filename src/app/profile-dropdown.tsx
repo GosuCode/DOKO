@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { SignOut } from "../components/sign-out";
 import SignIn from "../components/sign-in";
+import Link from "next/link";
 
 type ProfileDropdownProps = {
   profileImage: string | null;
@@ -26,7 +27,12 @@ export default function ProfileDropdown({
         className="relative w-15 h-15 rounded-full overflow-hidden cursor-pointer"
         onClick={menuToggle}
       >
-        <Image src={profileImage} alt="Profile" width={50} height={50} />
+        <Image
+          src={profileImage as string}
+          alt="Profile"
+          width={50}
+          height={50}
+        />
       </div>
       <div
         className={`absolute top-16 right-0 p-4 bg-[#f5f3ff] w-52 rounded-xl shadow-lg transition-all duration-500 ${
@@ -43,20 +49,20 @@ export default function ProfileDropdown({
         </h3>
         <ul>
           <li className="flex items-center py-4 border-t border-gray-100 hover:text-palette-primary">
-            <a
-              href="#"
+            <Link
+              href="/dashboard"
               className="font-medium text-gray-600 hover:text-palette-primary"
             >
               Dashboard
-            </a>
+            </Link>
           </li>
           <li className="flex items-center py-4 border-t border-gray-100 hover:text-palette-primary">
-            <a
-              href="#"
+            <Link
+              href="/product/cart"
               className="font-medium text-gray-600 hover:text-palette-primary"
             >
               Inbox
-            </a>
+            </Link>
           </li>
           <li className="flex items-center py-4 border-t border-gray-100 hover:text-palette-primary">
             <a

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "./header";
-import Footer from "./footer";
+import Providers from "@/components/dashboard/layout/providers";
+import { auth } from "@/auth";
+import { Toaster } from "@/components/ui/toaster";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,19 +22,22 @@ export const metadata: Metadata = {
   description: "Handmade products by nepali people",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <div className="container mx-auto py-12">{children}</div>
-        <Footer />
+        <NextTopLoader showSpinner={false} />
+        <Providers session={session}>
+          <div>{children}</div>
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
