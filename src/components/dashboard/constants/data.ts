@@ -118,8 +118,14 @@ export const navItems: NavItem[] = [
     label: 'Dashboard'
   },
   {
+    title: 'New Product',
+    href: '/dashboard/products/create',
+    icon: 'laptop',
+    label: 'New Product'
+  },
+  {
     title: 'Your Product',
-    href: '/dashboard/your-product',
+    href: '/dashboard/products/your-product',
     icon: 'post',
     label: 'Your Product'
   },

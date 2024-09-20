@@ -37,6 +37,7 @@ export function CarouselPlugin() {
                     alt={item.title}
                     width={500}
                     height={500}
+                    className="object-cover"
                   />
                 </CardContent>
               </Card>

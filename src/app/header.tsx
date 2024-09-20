@@ -31,11 +31,7 @@ const Header = async () => {
             <div>{!session ? <SignIn /> : ""}</div>
             {session ? (
               <>
-                <Button
-                  variant="ghost"
-                  className="fixed top-2 right-24"
-                  asChild
-                >
+                <Button variant="ghost" className="" asChild>
                   <Link href={"/product/cart"}>
                     <ShoppingCart size={28} />
                   </Link>

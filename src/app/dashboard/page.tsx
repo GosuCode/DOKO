@@ -23,7 +23,7 @@ export default function page() {
           </h2>
           <div className="hidden items-center space-x-1 md:flex">
             <Button>
-              <Link href="/product/add-product">Add Product</Link>
+              <Link href="/dashboard/products/create">Add Product</Link>
             </Button>
           </div>
         </div>
