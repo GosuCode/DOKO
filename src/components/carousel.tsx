@@ -9,8 +9,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
@@ -37,6 +35,7 @@ export function CarouselPlugin() {
                     alt={item.title}
                     width={500}
                     height={500}
+                    className="object-cover"
                   />
                 </CardContent>
               </Card>
@@ -44,8 +43,6 @@ export function CarouselPlugin() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   );
 }

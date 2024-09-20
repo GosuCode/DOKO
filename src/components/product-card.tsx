@@ -10,8 +10,11 @@ function ProductCard({ product }: { product: ANProduct }) {
   const image_public_id = product.image;
 
   return (
-    <Link href={`/product/${product.id}`} passHref>
-      <section className="h-[400px] w-72 rounded shadow-lg mx-auto border border-palette-lighter">
+    <Link
+      href={`/product/${product.id}`}
+      className="w-full flex justify-center"
+    >
+      <section className="h-[400px] w-80 rounded shadow-lg border border-palette-lighter">
         <figure className="h-72 border-b-2 border-palette-lighter relative">
           <DisplayImage public_id={image_public_id} alt={product.name} />
         </figure>

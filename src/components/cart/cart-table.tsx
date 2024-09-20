@@ -22,12 +22,18 @@ function CartTable({ cart }: { cart: ANCart[] }) {
       <table className="mx-auto">
         <thead>
           <tr className="uppercase text-xs sm:text-sm text-palette-primary border-b border-palette-light">
-            <th className="font-primary font-normal px-6 py-4">Product</th>
-            <th className="font-primary font-normal px-6 py-4">Quantity</th>
-            <th className="font-primary font-normal px-6 py-4 hidden sm:table-cell">
+            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
+              Product
+            </th>
+            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
+              Quantity
+            </th>
+            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4 hidden sm:table-cell">
               Price
             </th>
-            <th className="font-primary font-normal px-6 py-4">Remove</th>
+            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
+              Remove
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-palette-lighter">
@@ -80,7 +86,7 @@ function CartTable({ cart }: { cart: ANCart[] }) {
                   {getDiscountedPrice(item.products.price, 60)}
                 </span>
               </td>
-              <td className="font-primary font-medium px-4 sm:px-6 py-4">
+              <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
                 <button
                   aria-label="delete-item"
                   onClick={() => removeProductFromCart(item.productId)}
@@ -93,10 +99,10 @@ function CartTable({ cart }: { cart: ANCart[] }) {
           {subtotal === 0 ? null : (
             <tr className="text-center">
               <td></td>
-              <td className="font-primary text-base text-gray-600 font-semibold uppercase px-4 sm:px-6 py-4">
+              <td className="font-primary text-base text-gray-600 font-semibold uppercase px-0 py-0 sm:px-6 sm:py-4">
                 Subtotal
               </td>
-              <td className="font-primary text-lg text-palette-primary font-medium px-4 sm:px-6 py-4">
+              <td className="font-primary text-lg text-palette-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
                 <span className="text-xl">Rs.{subtotal.toFixed(2)}</span>
               </td>
               <td></td>

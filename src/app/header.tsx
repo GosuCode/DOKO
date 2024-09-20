@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import ProfileDropdown from "@/app/profile-dropdown";
+import { ProfileDropdown } from "@/components/profile-dropdown";
 import SignIn from "@/components/sign-in";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
@@ -8,58 +8,37 @@ import Link from "next/link";
 
 const Header = async () => {
   const session = await auth();
-  const profileImage = session?.user?.image;
-  const userName = session?.user?.name;
-
+  // Add icons before list
   return (
-    <header className="fixed top-0 left-0 w-full py-2 flex bg-white justify-center z-50 h-16">
+    <header className="fixed top-0 left-0 w-full py-2 px-4 sm:px-0 flex bg-white justify-center z-50 h-16">
       <nav className="container flex justify-between items-center">
         <div className="container flex justify-between items-center gap-12">
           <Link href="/" className="hover:underline flex items-center gap-1">
             <Image src="/logo.svg" width="50" height="50" alt="Logo" />
-            Artisan Nepal
+            <span className="font-bold hidden sm:inline-flex">
+              Artisan Nepal
+            </span>
           </Link>
 
-          <div className="flex items-center gap-8">
+          <div className="items-center gap-8 hidden sm:flex">
             <Link
               href="/product/product-list"
               className="hover:underline flex items-center gap-1"
             >
               All Products
             </Link>
-            <Link
-              href={"/product/create"}
-              className="hover:underline flex items-center gap-1"
-            >
-              Add Product
-            </Link>
-
-            <Link
-              href={"/product/your-product"}
-              className="hover:underline flex items-center gap-1"
-            >
-              Your Product
-            </Link>
           </div>
 
-          <section className="flex items-center gap-6">
+          <section className="flex items-center">
             <div>{!session ? <SignIn /> : ""}</div>
             {session ? (
               <>
-                <Button
-                  variant="ghost"
-                  className="fixed top-2 right-24"
-                  asChild
-                >
+                <Button variant="ghost" className="hidden sm:flex" asChild>
                   <Link href={"/product/cart"}>
                     <ShoppingCart size={28} />
                   </Link>
                 </Button>
-                <ProfileDropdown
-                  profileImage={profileImage}
-                  userName={userName}
-                  session={session}
-                />
+                <ProfileDropdown />
               </>
             ) : (
               ""

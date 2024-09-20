@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
 import { CldUploadWidget } from "next-cloudinary";
-import { updateProductAction } from "@/app/product/your-product/actions";
+import { updateProductAction } from "@/app/dashboard/products/your-product/actions";
 import { ANProduct } from "@/db/schema";
 import { Textarea } from "./ui/textarea";
 

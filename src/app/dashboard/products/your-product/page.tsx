@@ -12,6 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Breadcrumbs } from "@/components/dashboard/breadcrumbs";
+
+const breadcrumbItems = [
+  { title: "Dashboard", link: "/dashboard" },
+  { title: "Your Product", link: "/dashboard/your-product" },
+];
 
 const YourProduct = async () => {
   const session = await auth();
@@ -24,7 +30,8 @@ const YourProduct = async () => {
 
   const hasItems = yourProducts.length > 0;
   return (
-    <div className="container h-screen">
+    <div className="mx-6 mt-4 h-screen overflow-auto">
+      <Breadcrumbs items={breadcrumbItems} />
       {hasItems ? (
         <Table>
           <TableCaption>List of your products</TableCaption>
