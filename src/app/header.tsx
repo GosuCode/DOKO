@@ -10,7 +10,7 @@ const Header = async () => {
   const session = await auth();
   // Add icons before list
   return (
-    <header className="fixed top-0 left-0 w-full py-2 flex bg-white justify-center z-50 h-16">
+    <header className="fixed top-0 left-0 w-full py-2 px-4 sm:px-0 flex bg-white justify-center z-50 h-16">
       <nav className="container flex justify-between items-center">
         <div className="container flex justify-between items-center gap-12">
           <Link href="/" className="hover:underline flex items-center gap-1">
@@ -29,7 +29,7 @@ const Header = async () => {
             </Link>
           </div>
 
-          <section className="flex items-center gap-6">
+          <section className="flex items-center">
             <div>{!session ? <SignIn /> : ""}</div>
             {session ? (
               <>

@@ -8,7 +8,7 @@ export default async function Home() {
     <main className="mt-16 container mx-auto py-12">
       <Header />
       <Banner />
-      <h1 className="text-center text-4xl font-bold mt-8 underline">
+      <h1 className="text-center text-2xl sm:text-4xl font-bold mt-8 underline">
         Explore the Products
       </h1>
       <ProductList />

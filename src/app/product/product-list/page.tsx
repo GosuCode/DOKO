@@ -8,7 +8,7 @@ const ProductList = async () => {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-4 gap-4 mt-20">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 sm:space-x-2 space-y-4 mt-20">
         {allProducts.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

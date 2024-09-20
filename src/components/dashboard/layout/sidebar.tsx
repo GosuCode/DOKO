@@ -28,7 +28,7 @@ export default function Sidebar({ className }: SidebarProps) {
       )}
     >
       <div className="hidden p-5 pt-10 lg:block">
-        <Link href={"/"} target="_blank">
+        <Link href={"/"}>
           <Image src="/logo.svg" width="50" height="50" alt="Logo" />
         </Link>
       </div>

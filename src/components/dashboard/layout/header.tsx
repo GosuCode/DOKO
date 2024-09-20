@@ -9,7 +9,7 @@ export default function Header() {
         <div className={cn("block lg:!hidden")}>
           <MobileSidebar />
         </div>
-        <div className="flex items-center gap-2 ">
+        <div className="flex items-center gap-2 md:hidden">
           <UserNav />
         </div>
       </nav>
