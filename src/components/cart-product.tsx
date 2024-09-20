@@ -18,7 +18,7 @@ const CartProduct = async ({ cartProduct }: { cartProduct: ANCart }) => {
       <TableBody>
         <TableRow>
           <TableCell className="font-medium relative w-[40px] h-[40px]">
-            <DisplayImage public_id={product[0].image} />
+            <DisplayImage public_id={product[0].image} alt={product[0].name} />
           </TableCell>
           <TableCell className="line-clamp-2">{product[0].name}</TableCell>
           <TableCell className="line-clamp-2">

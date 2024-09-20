@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@/auth";
-import { ANCart, ANProduct, cart } from "@/db/schema";
+import { cart } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { database } from "@/db/database";
 import { revalidatePath } from "next/cache";
@@ -13,9 +13,7 @@ export async function showCartProducts() {
     throw new Error("Unauthorized")
   }
 
-  let cartProducts: (ANCart & { products: ANProduct })[];
-
-    cartProducts = await database.query.cart.findMany({
+  const cartProducts = await database.query.cart.findMany({
       where: eq(cart.userId, session.user.id!),
       with: {
         products: {
