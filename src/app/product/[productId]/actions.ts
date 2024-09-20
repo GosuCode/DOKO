@@ -25,11 +25,13 @@ export async function createCartAction(productId: number, formData: FormData) {
     throw new Error("Invalid quantity")
   }
 
+  const subtotal = product.price * quantity - (product.price * product.discount / 100);
+
   await database.insert(cart).values({
     userId: session.user.id,
     productId,
     quantity,
-    subtotal: product.price * quantity,
+    subtotal: subtotal,
   })
 
   await database.update(products).set({

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import DisplayImage from "./display-image";
 import { ANProduct } from "@/db/schema";
-import { getDiscountedPrice } from "@/utils/getDiscountedPrice";
 
 function ProductCard({ product }: { product: ANProduct }) {
   const name = product.name;
   const price = product.price;
   const discount = product.discount;
   const image_public_id = product.image;
+  const subtotal = product.price - (product.price * product.discount) / 100;
 
   return (
     <Link
@@ -34,9 +34,7 @@ function ProductCard({ product }: { product: ANProduct }) {
             className="text-palette-dark font-primary font-medium text-base absolute bottom-16 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
             rounded-tl-sm triangle"
           >
-            <span className="text-purple-800">
-              Rs.{getDiscountedPrice(price, discount)}
-            </span>
+            <span className="text-purple-800">Rs.{subtotal}</span>
           </div>
         </div>
       </section>

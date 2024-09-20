@@ -29,6 +29,7 @@ export default async function ProductDetails({
         title={product.name}
         price={product.price}
         description={product.description}
+        discount={product.discount}
       />
       <ProductForm productId={product.id} />
     </div>

@@ -2,19 +2,19 @@
 
 import { X } from "lucide-react";
 import Link from "next/link";
-import { ANCart } from "@/db/schema";
+import { ANCartWithProduct } from "@/db/schema";
 import DisplayImage from "../display-image";
 import { Input } from "../ui/input";
-import { getDiscountedPrice } from "@/utils/getDiscountedPrice";
 import { removeProductFromCart } from "@/app/product/cart/actions";
 
-function CartTable({ cart }: { cart: ANCart[] }) {
-  const cartItems = cart.map((item: ANCart) => ({
+function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
+  const cartItems = cart.map((item: ANCartWithProduct) => ({
     ...item,
   }));
   const subtotal = cartItems.reduce((total, item) => {
-    const itemPrice = getDiscountedPrice(item.products.price, 60);
-    return total + itemPrice * item.quantity;
+    const itemPrice = item.subtotal;
+    console.log(item);
+    return total + itemPrice * Number(item.quantity);
   }, 0);
 
   return (
@@ -81,10 +81,7 @@ function CartTable({ cart }: { cart: ANCart[] }) {
               </td>
               <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
                 {/* <Price currency="$" num={item.variantPrice} numSize="text-lg" /> */}
-                <span className="text-lg">
-                  Rs.
-                  {getDiscountedPrice(item.products.price, 60)}
-                </span>
+                <span className="text-lg">Rs.{item.subtotal}</span>
               </td>
               <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
                 <button

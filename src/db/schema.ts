@@ -104,3 +104,6 @@ export const cartRelations = relations(cart, ({ one }) => ({
 
 export type ANProduct = typeof products.$inferSelect;
 export type ANCart = typeof cart.$inferSelect;
+export type ANCartWithProduct = typeof cart.$inferSelect & {
+  products: ANProduct;
+};

@@ -23,6 +23,7 @@ export async function showCartProducts() {
             name: true,
             image: true,
             price: true,
+            discount: true,
           },
         },
       },
