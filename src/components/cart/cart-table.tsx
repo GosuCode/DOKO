@@ -43,13 +43,6 @@ function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
               className="text-sm sm:text-base text-gray-600 text-center"
             >
               <td className="font-primary font-medium px-4 sm:px-6 py-4 flex items-center">
-                {/* <img
-                  src="logo.svg"
-                  alt={item.products.name}
-                  height={64}
-                  width={64}
-                  className={`hidden sm:inline-flex`}
-                /> */}
                 <figure className="relative h-20 w-20">
                   <Link href={`/product/${item.productId}`}>
                     <DisplayImage
@@ -62,7 +55,6 @@ function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
                   href={`/product/${item.productId}`}
                   className="pt-1 hover:text-palette-dark"
                 >
-                  {/* {item.productTitle}, {item.variantTitle} */}
                   {item.products.name}
                 </Link>
               </td>
@@ -80,7 +72,6 @@ function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
                 />
               </td>
               <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
-                {/* <Price currency="$" num={item.variantPrice} numSize="text-lg" /> */}
                 <span className="text-lg">Rs.{item.subtotal}</span>
               </td>
               <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">

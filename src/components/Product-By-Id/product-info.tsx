@@ -13,9 +13,13 @@ function ProductInfo({ title, price, discount }: ProductInfoProps) {
         {title}
       </h1>
       <div className="text-xl text-palette-primary font-medium py-4 px-1">
-        <span className="line-through text-lg text-red-500">
-          Rs.{discountedPrice}
-        </span>{" "}
+        {discount > 0 ? (
+          <span className="line-through text-lg text-red-500">
+            Rs.{discountedPrice}
+          </span>
+        ) : (
+          ""
+        )}
         <br />
         <span className="text-purple-800">Rs.{price}</span>
       </div>
