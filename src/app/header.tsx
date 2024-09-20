@@ -14,7 +14,14 @@ const Header = async () => {
       <nav className="container flex justify-between items-center">
         <div className="container flex justify-between items-center gap-12">
           <Link href="/" className="hover:underline flex items-center gap-1">
-            <Image src="/logo.svg" width="50" height="50" alt="Logo" />
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              height={0}
+              width={0}
+              className="h-12 w-auto"
+              sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
+            />
             <span className="font-bold hidden sm:inline-flex">
               Artisan Nepal
             </span>

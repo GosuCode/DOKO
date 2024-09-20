@@ -55,6 +55,7 @@ export default function CreateProduct() {
                 height={500}
                 alt="Product Image"
                 className="w-64 h-64 object-cover rounded-md"
+                sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
               />
             </div>
           )}

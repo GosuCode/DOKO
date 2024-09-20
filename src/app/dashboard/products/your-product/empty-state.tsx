@@ -6,7 +6,13 @@ import React from "react";
 const EmptyState = () => {
   return (
     <div className="space-y-8 flex flex-col items-center justify-center h-screen">
-      <Image src="/empty-state.svg" width="200" height="200" alt="Package" />
+      <Image
+        src="/empty-state.svg"
+        width="200"
+        height="200"
+        alt="Package"
+        sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
+      />
       <h2 className="text-2xl font-bold">You have no products yet</h2>
       <Button asChild>
         <Link href="/product/create">Create Product</Link>

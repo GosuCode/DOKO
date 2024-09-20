@@ -63,6 +63,7 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
             height="500"
             src={resource}
             alt="Description of my image"
+            sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
           />
         )}
         <label htmlFor="name">Proudct Name</label>

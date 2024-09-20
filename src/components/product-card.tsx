@@ -15,9 +15,9 @@ function ProductCard({ product }: { product: ANProduct }) {
       className="w-full flex justify-center"
     >
       <section className="h-[400px] w-80 rounded shadow-lg border border-palette-lighter">
-        <figure className="h-72 border-b-2 border-palette-lighter relative">
+        <>
           <DisplayImage public_id={image_public_id} alt={product.name} />
-        </figure>
+        </>
         <div className="h-48 relative">
           <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold line-clamp-1">
             {name}

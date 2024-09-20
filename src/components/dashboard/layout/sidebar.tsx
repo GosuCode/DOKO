@@ -29,7 +29,13 @@ export default function Sidebar({ className }: SidebarProps) {
     >
       <div className="hidden p-5 pt-10 lg:block">
         <Link href={"/"}>
-          <Image src="/logo.svg" width="50" height="50" alt="Logo" />
+          <Image
+            src="/logo.svg"
+            height="50"
+            width="50"
+            alt="Logo"
+            sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
+          />
         </Link>
       </div>
       <ChevronLeft
