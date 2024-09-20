@@ -5,11 +5,18 @@ import { CldImage } from "next-cloudinary";
 type DisplayImageProps = {
   public_id: string;
   alt: string;
+  className?: string;
 };
 
-export default function DisplayImage({ public_id, alt }: DisplayImageProps) {
+export default function DisplayImage({
+  public_id,
+  alt,
+  className,
+}: DisplayImageProps) {
   return (
-    <figure className="h-72 border-b-2 border-palette-lighter relative">
+    <figure
+      className={`border-b-2 border-palette-lighter relative ${className}`}
+    >
       <CldImage
         src={public_id}
         alt={alt}

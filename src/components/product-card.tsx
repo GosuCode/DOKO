@@ -10,15 +10,16 @@ function ProductCard({ product }: { product: ANProduct }) {
   const subtotal = product.price - (product.price * product.discount) / 100;
 
   return (
-    <Link
-      href={`/product/${product.id}`}
-      className="w-full flex justify-center"
-    >
+    <Link href={`/product/${product.id}`} className="flex justify-center">
       <section className="h-[400px] w-80 rounded shadow-lg border border-palette-lighter">
         <>
-          <DisplayImage public_id={image_public_id} alt={product.name} />
+          <DisplayImage
+            public_id={image_public_id}
+            alt={product.name}
+            className="h-72"
+          />
         </>
-        <div className="h-48 relative">
+        <div className="relative">
           <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold line-clamp-1">
             {name}
           </div>
@@ -31,7 +32,7 @@ function ProductCard({ product }: { product: ANProduct }) {
             </span>
           </div>
           <div
-            className="text-palette-dark font-primary font-medium text-base absolute bottom-16 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
+            className="text-palette-dark font-primary font-medium text-base absolute -bottom-12 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
             rounded-tl-sm triangle"
           >
             <span className="text-purple-800">Rs.{subtotal}</span>

@@ -17,7 +17,11 @@ const YourProductComponent = ({ product }: { product: ANProduct }) => {
         <TableRow>
           <TableCell>
             <div className="relative w-[120px] h-[120px]">
-              <DisplayImage public_id={product.image} alt={product.name} />
+              <DisplayImage
+                public_id={product.image}
+                alt={product.name}
+                className="h-full"
+              />
             </div>
           </TableCell>
           <TableCell>{product.name}</TableCell>

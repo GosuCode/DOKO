@@ -48,6 +48,7 @@ function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
                     <DisplayImage
                       public_id={item.products.image}
                       alt={item.products.name}
+                      className="h-full"
                     />
                   </Link>
                 </figure>
