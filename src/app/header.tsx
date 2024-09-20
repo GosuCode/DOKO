@@ -15,10 +15,12 @@ const Header = async () => {
         <div className="container flex justify-between items-center gap-12">
           <Link href="/" className="hover:underline flex items-center gap-1">
             <Image src="/logo.svg" width="50" height="50" alt="Logo" />
-            Artisan Nepal
+            <span className="font-bold hidden sm:inline-flex">
+              Artisan Nepal
+            </span>
           </Link>
 
-          <div className="flex items-center gap-8">
+          <div className="items-center gap-8 hidden sm:flex">
             <Link
               href="/product/product-list"
               className="hover:underline flex items-center gap-1"
@@ -31,7 +33,7 @@ const Header = async () => {
             <div>{!session ? <SignIn /> : ""}</div>
             {session ? (
               <>
-                <Button variant="ghost" className="" asChild>
+                <Button variant="ghost" className="hidden sm:flex" asChild>
                   <Link href={"/product/cart"}>
                     <ShoppingCart size={28} />
                   </Link>
