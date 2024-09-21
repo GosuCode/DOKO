@@ -24,7 +24,6 @@ export default function CreateProduct() {
     <section className="px-10 py-8 mt-4 bg-white rounded-md shadow-md">
       <h1 className="text-2xl font-semibold mb-6">Create New Product</h1>
       <form action={handleSubmit} className="space-y-6">
-        {/* Image Upload Section */}
         <div className="flex flex-col items-start">
           <CldUploadWidget
             uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
@@ -61,7 +60,6 @@ export default function CreateProduct() {
           )}
         </div>
 
-        {/* Product Details Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label htmlFor="name" className="block mb-1 font-medium">
@@ -116,7 +114,6 @@ export default function CreateProduct() {
           </div>
         </div>
 
-        {/* Category Selection */}
         <div>
           <label htmlFor="categories" className="block mb-1 font-medium">
             Categories
@@ -124,7 +121,6 @@ export default function CreateProduct() {
           <SelectScrollable name="categories" />
         </div>
 
-        {/* Product Description */}
         <div>
           <label htmlFor="description" className="block mb-1 font-medium">
             Description
@@ -137,7 +133,6 @@ export default function CreateProduct() {
           />
         </div>
 
-        {/* Submit Button */}
         <div className="flex justify-start">
           <Button type="submit" className="px-6 py-2">
             Submit

@@ -1,20 +1,17 @@
 import React from "react";
 import { getProducts } from "./actions";
-import ProductCard from "@/components/product-card";
 import Header from "@/app/header";
+import { ANProduct } from "@/db/schema";
+import ProductWithSidebar from "@/components/all-products/product-with-sidebar";
 
-const ProductList = async () => {
-  const allProducts = await getProducts();
+const ProductListPage = async () => {
+  const allProducts: ANProduct[] = await getProducts();
   return (
     <>
       <Header />
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 sm:space-x-2 space-y-4 mt-20">
-        {allProducts.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </div>
+      <ProductWithSidebar allProducts={allProducts} />
     </>
   );
 };
 
-export default ProductList;
+export default ProductListPage;
