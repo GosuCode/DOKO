@@ -95,15 +95,77 @@ export const cart = pgTable("an_cart", {
   subtotal: integer("subtotal").notNull(),
 })
 
+export const orders = pgTable("an_order", {
+  id: serial("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  totalAmount: integer("totalAmount").notNull(),
+  status: text("status").notNull().default("pending"),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
+});
+
+export const orderItems = pgTable("an_order_item", {
+  id: serial("id").primaryKey(),
+  orderId: integer("orderId")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
+  productId: integer("productId")
+    .notNull()
+    .references(() => products.id, { onDelete: "cascade" }),
+  quantity: integer("quantity").notNull(),
+  price: integer("price").notNull(),
+});
+
+
+// Relations
+
+// Each cart item is associated with one product and one user.
 export const cartRelations = relations(cart, ({ one }) => ({
   products: one(products, {
     fields: [cart.productId],
     references: [products.id],
   }),
+  user: one(users, {
+    fields: [cart.userId],
+    references: [users.id],
+  }),
 }));
+
+// A product can be in many cart items and many order items.
+export const productsRelations = relations(products, ({ many }) => ({
+  cartItems: many(cart),
+  orders: many(orders),
+}));
+
+// Each order is associated with one user and can have many order items.
+export const ordersRelations = relations(orders, ({ many, one }) => ({
+  user: one(users, {
+    fields: [orders.userId],
+    references: [users.id],
+  }),
+  items: many(orderItems),
+}));
+
+// Each order item is associated with one order and one product.
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderItems.orderId],
+    references: [orders.id],
+  }),
+  product: one(products, {
+    fields: [orderItems.productId],
+    references: [products.id],
+  }),
+}));
+
 
 export type ANProduct = typeof products.$inferSelect;
 export type ANCart = typeof cart.$inferSelect;
 export type ANCartWithProduct = typeof cart.$inferSelect & {
   products: ANProduct;
 };
+
+export type ANOrders = typeof orders.$inferSelect;
+export type ANOrderItems = typeof orderItems.$inferSelect;
