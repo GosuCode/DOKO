@@ -122,7 +122,7 @@ export const orderItems = pgTable("an_order_item", {
 export const reviews = pgTable("an_review", {
   id: serial("id").primaryKey(),
   productId: integer("product_id").notNull(),
-  userId: integer("user_id").notNull(),
+  userId: text("user_id").notNull(),
   content: text("content").notNull(),
   rating: integer("rating").notNull(),
 }, (table) => ({

@@ -1,6 +1,10 @@
 import ReviewCard from "./review-card";
 import WriteReview from "./write-review";
-const DisplayReview = () => {
+
+type DisplayReviewProps = {
+  productId: number;
+};
+const DisplayReview = ({ productId }: DisplayReviewProps) => {
   return (
     <div className="flex flex-col gap-4 w-3/5 mx-auto">
       <h2 className="text-2xl font-bold text-left mt-12">Reviews</h2>
@@ -10,7 +14,7 @@ const DisplayReview = () => {
         rating={2}
         review="This is a great product!"
       />
-      <WriteReview />
+      <WriteReview productId={productId} />
     </div>
   );
 };

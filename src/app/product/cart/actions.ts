@@ -52,7 +52,7 @@ export async function checkout(cartItemIds: number[]) {
       with: { products: true },
     });
   } else {
-    // Fetch all cart items as before
+    // Fetch all cart items
     cartItems = await database.query.cart.findMany({
       where: eq(cart.userId, session.user.id!),
       with: {

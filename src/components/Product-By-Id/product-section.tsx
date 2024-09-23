@@ -13,7 +13,7 @@ function ProductSection({ product }: { product: ANProduct }) {
       <div className="container mt-10 p-10 sm:w-3/5 mx-auto bg-gray-100 rounded-md">
         {product?.description}
       </div>
-      <DisplayReview />
+      <DisplayReview productId={product.id} />
     </section>
   );
 }
