@@ -98,3 +98,12 @@ export async function addReviewAction(productId: number, formData: FormData, rat
     throw error
   }
 }
+
+export async function getReviewsAction(productId: number) {
+
+  const review = await database.select()
+    .from(reviews)
+    .where(eq(reviews.productId, productId))
+    .execute()
+  return review
+}

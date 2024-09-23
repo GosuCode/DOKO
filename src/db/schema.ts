@@ -13,9 +13,9 @@ import type { AdapterAccountType } from "next-auth/adapters"
 export const users = pgTable("an_user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").unique(),
+    .$defaultFn(() => crypto.randomUUID()).notNull(),
+  name: text("name").notNull(),
+  email: text("email").unique().notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 })
@@ -167,6 +167,7 @@ export const reviewsRelations = relations(reviews, ({ one }) => ({
   }),
 }));
 
+export type ANUsers = typeof users.$inferSelect;
 export type ANProduct = typeof products.$inferSelect;
 export type ANCart = typeof cart.$inferSelect;
 export type ANCartWithProduct = typeof cart.$inferSelect & {
