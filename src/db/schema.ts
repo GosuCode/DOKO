@@ -6,15 +6,16 @@ import {
   primaryKey,
   integer,
   serial,
+  uniqueIndex,
 } from "drizzle-orm/pg-core"
 import type { AdapterAccountType } from "next-auth/adapters"
 
 export const users = pgTable("an_user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").unique(),
+    .$defaultFn(() => crypto.randomUUID()).notNull(),
+  name: text("name").notNull(),
+  email: text("email").unique().notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 })
@@ -95,6 +96,39 @@ export const cart = pgTable("an_cart", {
   subtotal: integer("subtotal").notNull(),
 })
 
+export const orders = pgTable("an_order", {
+  id: serial("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  totalAmount: integer("totalAmount").notNull(),
+  status: text("status").notNull().default("pending"),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow(),
+  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow(),
+});
+
+export const orderItems = pgTable("an_order_item", {
+  id: serial("id").primaryKey(),
+  orderId: integer("orderId")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
+  productId: integer("productId")
+    .notNull()
+    .references(() => products.id, { onDelete: "cascade" }),
+  quantity: integer("quantity").notNull(),
+  price: integer("price").notNull(),
+});
+
+export const reviews = pgTable("an_review", {
+  id: serial("id").primaryKey(),
+  productId: integer("product_id").notNull(),
+  userId: text("user_id").notNull(),
+  content: text("content").notNull(),
+  rating: integer("rating").notNull(),
+}, (table) => ({
+  uniqueUserProductReview: uniqueIndex('unique_user_product_review').on(table.userId, table.productId),
+}));
+
 export const cartRelations = relations(cart, ({ one }) => ({
   products: one(products, {
     fields: [cart.productId],
@@ -102,8 +136,49 @@ export const cartRelations = relations(cart, ({ one }) => ({
   }),
 }));
 
+
+export const ordersRelations = relations(orders, ({ one, many }) => ({
+  user: one(users, {
+    fields: [orders.userId],
+    references: [users.id],
+  }),
+  orderItems: many(orderItems),
+}));
+
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderItems.orderId],
+    references: [orders.id],
+  }),
+  product: one(products, {
+    fields: [orderItems.productId],
+    references: [products.id],
+  }),
+}));
+
+export const reviewsRelations = relations(reviews, ({ one }) => ({
+  products: one(products, {
+    fields: [reviews.productId],
+    references: [products.id],
+  }),
+  users: one(users, {
+    fields: [reviews.userId],
+    references: [users.id],
+  }),
+}));
+
+export type ANUsers = typeof users.$inferSelect;
 export type ANProduct = typeof products.$inferSelect;
 export type ANCart = typeof cart.$inferSelect;
 export type ANCartWithProduct = typeof cart.$inferSelect & {
+  products: ANProduct;
+};
+export type ANOrders = typeof orders.$inferSelect;
+export type ANOrderItems = typeof orderItems.$inferSelect;
+export type ANOrdersWithOrderItems = typeof orders.$inferSelect & {
+  orderItems: ANOrderItems[];
+};
+export type ANReviews = typeof reviews.$inferSelect;
+export type ANReviewsWithProduct = typeof reviews.$inferSelect & {
   products: ANProduct;
 };
