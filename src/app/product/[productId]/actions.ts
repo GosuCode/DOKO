@@ -107,3 +107,15 @@ export async function getReviewsAction(productId: number) {
     .execute()
   return review
 }
+
+export async function hasPurchasedAction(productId: number, userId: string) {
+  const hasPurchased = await database.select()
+    .from(orderItems)
+    .innerJoin(orders, eq(orderItems.orderId, orders.id))
+    .where(and(
+      eq(orders.userId, userId),
+      eq(orderItems.productId, productId)
+    ))
+    .execute()
+  return hasPurchased.length > 0
+}
