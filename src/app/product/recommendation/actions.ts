@@ -18,6 +18,27 @@ export async function getRecommendationsAction(userId: string) {
 
   // console.log("User Ratings:", JSON.stringify(userRatings, null, 2));
 
+  // function cosineSimilarity(
+  //   prefs: Record<string, Record<number, number>>,
+  //   user1: string,
+  //   user2: string
+  // ) {
+  //   let sum1 = 0, sum2 = 0, pSum = 0;
+  
+  //   for (const product in prefs[user1]) {
+  //     const rating1 = prefs[user1][product];
+  //     const rating2 = prefs[user2][product] || 0; // Default to 0 if not rated
+  
+  //     sum1 += rating1 * rating1;
+  //     sum2 += rating2 * rating2;
+  //     pSum += rating1 * rating2;
+  //   }
+  
+  //   const denominator = Math.sqrt(sum1) * Math.sqrt(sum2);
+  //   if (denominator === 0) return 0;
+  //   return pSum / denominator;
+  // }  
+
   function pearsonCorrelation(
     prefs: Record<string, Record<number, number>>,
     user1: string,
@@ -103,10 +124,10 @@ export async function getRecommendationsAction(userId: string) {
     userRatings,
     userId
   );
-  // console.log(
-  //   "Recommendations for '" + userId + "':",
-  //   recommendations
-  // );
+  console.log(
+    "Recommendations for '" + userId + "':",
+    recommendations
+  );
 
   return recommendations;
 }

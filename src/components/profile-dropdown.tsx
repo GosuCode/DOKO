@@ -26,7 +26,9 @@ export function ProfileDropdown() {
                 src={session.user?.image ?? ""}
                 alt={session.user?.name ?? ""}
               />
-              <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
+              <AvatarFallback className="border-2 border-[#3f3d56] text-xl font-bold text-center">
+                {session.user?.name?.[0]}
+              </AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>

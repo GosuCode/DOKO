@@ -13,10 +13,10 @@ const RecommendationPage = async () => {
   const recommendationProducts = await getRecommendationProductAction(
     recommendations.map((recommendation) => recommendation.product_id)
   );
-  console.log(recommendationProducts.length);
+  console.log("Recommended Products count", recommendationProducts.length);
   return (
     <>
-      {recommendationProducts.length < 0 ? (
+      {recommendationProducts.length > 0 ? (
         <h1 className="ml-10 sm:ml-4 text-left text-2xl sm:text-4xl font-bold mt-14 underline">
           Recommendations
         </h1>
