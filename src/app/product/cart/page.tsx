@@ -3,8 +3,8 @@ import CheckOutButton from "@/components/cart/checkout-button";
 import PageTitle from "@/components/page-title";
 import BackToProductButton from "@/components/Product-By-Id/back-to-product-button";
 import { showCartProducts } from "./actions";
-import EmptyCart from "./empty-cart";
 import Header from "@/app/header";
+import EmptyComponent from "@/components/empty-page";
 
 async function CartPage() {
   const cartProducts = await showCartProducts();
@@ -25,7 +25,11 @@ async function CartPage() {
             </div>
           </>
         ) : (
-          <EmptyCart />
+          <EmptyComponent
+            pageName="cart"
+            btnName="Add Product"
+            link="/product/product-list"
+          />
         )}
       </div>
     </>

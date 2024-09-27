@@ -3,8 +3,10 @@ import Link from "next/link";
 import DisplayImage from "../display-image";
 import { Input } from "../ui/input";
 import { X } from "lucide-react";
-import { removeProductFromCart } from "@/app/product/cart/actions";
-const OrderTable = ({ order }) => {
+import { ANOrdersWithOrderItems } from "@/db/schema";
+
+const OrderTable = ({ order }: { order: ANOrdersWithOrderItems }) => {
+  const orderItems = order.orderItems;
   const subtotal = 85258;
   return (
     <div className="min-h-80 max-w-2xl my-4 sm:my-8 mx-auto w-full">
@@ -26,7 +28,7 @@ const OrderTable = ({ order }) => {
           </tr>
         </thead>
         <tbody className="divide-y divide-palette-lighter">
-          {order.orderItems.map((item) => (
+          {orderItems.map((item) => (
             <tr
               key={item.id}
               className="text-sm sm:text-base text-gray-600 text-center"
@@ -62,7 +64,7 @@ const OrderTable = ({ order }) => {
                 />
               </td>
               <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
-                <span className="text-lg">Rs.{item.subtotal}</span>
+                <span className="text-lg">Rs.{}</span>
               </td>
               <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
                 <button
