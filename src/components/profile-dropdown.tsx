@@ -51,6 +51,15 @@ export function ProfileDropdown() {
                 Dashboard
               </Link>
             </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/product/cart">Cart</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/product/order">View order</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/about-us">About Us</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

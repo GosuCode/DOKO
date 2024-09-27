@@ -36,13 +36,13 @@ const Header = async () => {
               href="/product/product-list"
               className="hover:underline flex items-center gap-1"
             >
-              All Products
+              Category
             </Link>
             <Link
-              href="/product/recommendation"
+              href="/about-us"
               className="hover:underline flex items-center gap-1"
             >
-              Recommendations
+              About
             </Link>
           </div>
           <div className="items-center space-x-1 hidden sm:flex">
