@@ -87,7 +87,7 @@ export default function CreateProduct() {
             />
           </div>
 
-          <div>
+          <div className="hidden">
             <label htmlFor="discount" className="block mb-1 font-medium">
               Discount
             </label>

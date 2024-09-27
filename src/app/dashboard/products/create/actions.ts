@@ -42,5 +42,5 @@ export async function createProductAction(formData: FormData, resource: string){
         discount: rawFormData.discount as unknown as number,
         categories: rawFormData.categories as string,
     })
-    redirect("/")
+    redirect("/dashboard/products/your-product")
 }

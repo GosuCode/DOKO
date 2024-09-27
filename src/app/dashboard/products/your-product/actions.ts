@@ -43,7 +43,7 @@ export async function updateProductAction(productId: number, formData: FormData,
         quantity
     }).where(eq(products.id, productId))
 
-    revalidatePath(`/product/your-product/${productId}`)
+    revalidatePath(`/dashboard/products/your-product`)
 }
 
 export async function getSingleProductAction(productId: number) {

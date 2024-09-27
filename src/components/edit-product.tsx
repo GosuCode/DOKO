@@ -26,10 +26,8 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl font-bold text-center underline">
-        Edit your product
-      </h1>
+    <section className="px-10 py-8 mt-4 bg-white rounded-md shadow-md">
+      <h1 className="text-2xl font-semibold mb-6">Update Product</h1>
 
       <form action={handleSubmit} className="flex flex-col gap-4 mt-10">
         <div>
@@ -106,9 +104,13 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
           defaultValue={product.description}
         />
 
-        <Button type="submit">Submit</Button>
+        <div className="flex justify-start">
+          <Button type="submit" className="px-6 py-2">
+            Submit
+          </Button>
+        </div>
       </form>
-    </div>
+    </section>
   );
 };
 

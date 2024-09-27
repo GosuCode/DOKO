@@ -31,7 +31,7 @@ const YourProductComponent = ({ product }: { product: ANProduct }) => {
           <TableCell>
             <div className="flex space-x-2 items-center">
               <Button variant="outline" asChild>
-                <Link href={`/product/your-product/${product.id}`}>
+                <Link href={`/dashboard/products/your-product/${product.id}`}>
                   <Edit2Icon size={16} />
                 </Link>
               </Button>
