@@ -1,6 +1,9 @@
 import Header from "@/components/dashboard/layout/header";
 // import Sidebar from "@/components/dashboard/layout/sidebar-old";
 import Sidebar from "@/components/dashboard/layout/sidebar";
+// import { Toaster } from "@/components/ui/toaster";
+
+import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,6 +23,7 @@ export default function DashboardLayout({
         <Header />
         {children}
       </main>
+      <Toaster />
     </div>
   );
 }

@@ -13,7 +13,6 @@ function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
   }));
   const subtotal = cartItems.reduce((total, item) => {
     const itemPrice = item.subtotal;
-    console.log(item);
     return total + itemPrice * Number(item.quantity);
   }, 0);
 

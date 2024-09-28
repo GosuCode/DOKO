@@ -1,42 +1,34 @@
 [
-    {
-      "id": 1,
-      "name": "Product 1",
-      "description": "Description of Product 1",
-      "price": 199.99,
-      "image": "/products/product1.png",
-      "fallback": "P1"
-    },
-    {
-      "id": 2,
-      "name": "Product 2",
-      "description": "Description of Product 2",
-      "price": 39.00,
-      "image": "/products/product2.png",
-      "fallback": "P2"
-    },
-    {
-      "id": 3,
-      "name": "Product 3",
-      "description": "Description of Product 3",
-      "price": 299.00,
-      "image": "/products/product3.png",
-      "fallback": "P3"
-    },
-    {
-      "id": 4,
-      "name": "Product 4",
-      "description": "Description of Product 4",
-      "price": 99.00,
-      "image": "/products/product4.png",
-      "fallback": "P4"
-    },
-    {
-      "id": 5,
-      "name": "Product 5",
-      "description": "Description of Product 5",
-      "price": 39.00,
-      "image": "/products/product5.png",
-      "fallback": "P5"
-    }
+  {
+    "id": 1,
+    "name": "Handmade Woolen Scarf",
+    "description": "A beautifully crafted woolen scarf made by local artisans using high-quality sheep wool.",
+    "price": 1500,
+    "image": "/product3.jpg",
+    "fallback": "WS"
+  },
+  {
+    "id": 2,
+    "name": "Hand-carved Wooden Buddha Statue",
+    "description": "An intricately hand-carved Buddha statue made from local wood, showcasing Nepali craftsmanship.",
+    "price": 8500,
+    "image": "/product2.jpg",
+    "fallback": "BS"
+  },
+  {
+    "id": 3,
+    "name": "Traditional Nepali Dhaka Topi",
+    "description": "A traditional Nepali cap made from Dhaka fabric, worn on special occasions.",
+    "price": 1200,
+    "image": "/product1.jpg",
+    "fallback": "DT"
+  },
+  {
+    "id": 4,
+    "name": "Handwoven Hemp Backpack",
+    "description": "A durable backpack made from locally sourced hemp, perfect for eco-conscious buyers.",
+    "price": 4500,
+    "image": "/product2.jpg",
+    "fallback": "HB"
+  }
 ]

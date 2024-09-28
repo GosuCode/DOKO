@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { SelectScrollable } from "./scrollable-select";
 import { createProductAction } from "@/app/dashboard/products/create/actions";
+import toast from "react-hot-toast";
 
 export default function CreateProduct() {
   const [resource, setResource] = useState("");
@@ -16,7 +17,7 @@ export default function CreateProduct() {
       formData.append("public_id", resource);
       createProductAction(formData, resource);
     } else {
-      console.error("Resource is undefined");
+      toast.error("Image is required.");
     }
   };
 
@@ -79,9 +80,11 @@ export default function CreateProduct() {
               Price
             </label>
             <Input
+              type="number"
               name="price"
               placeholder="Price"
               required
+              step={1}
               autoComplete="off"
               className="w-full"
             />
@@ -92,6 +95,8 @@ export default function CreateProduct() {
               Discount
             </label>
             <Input
+              type="number"
+              step={1}
               name="discount"
               placeholder="Discount"
               defaultValue={0}
@@ -105,6 +110,8 @@ export default function CreateProduct() {
               Quantity
             </label>
             <Input
+              type="number"
+              step={1}
               name="quantity"
               placeholder="Quantity"
               required

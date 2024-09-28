@@ -8,6 +8,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { updateProductAction } from "@/app/dashboard/products/your-product/actions";
 import { ANProduct } from "@/db/schema";
 import { Textarea } from "./ui/textarea";
+import toast from "react-hot-toast";
 
 type EditProductProps = {
   productId: number;
@@ -21,6 +22,7 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
       formData.append("public_id", resource);
       updateProductAction(productId, formData, resource);
     } else {
+      toast.error("Image is required!");
       console.error("Resource is undefined");
     }
   };
@@ -74,6 +76,8 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
         />
         <label htmlFor="price">Price</label>
         <Input
+          type="number"
+          step={1}
           name="price"
           placeholder="Price"
           required
@@ -82,6 +86,8 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
         />
         <label htmlFor="discout">Discount</label>
         <Input
+          type="number"
+          step={1}
           name="discount"
           placeholder="Discount"
           autoComplete="off"
@@ -89,6 +95,8 @@ const EditProduct = ({ productId, product }: EditProductProps) => {
         />
         <label htmlFor="quantity">Quantity</label>
         <Input
+          type="number"
+          step={1}
           name="quantity"
           placeholder="Quantity"
           required

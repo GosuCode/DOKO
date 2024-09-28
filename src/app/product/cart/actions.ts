@@ -68,9 +68,9 @@ export async function checkout(cartItemIds: number[]) {
   // Create a new order
   const [newOrder] = await database.insert(orders).values({
     userId: session.user.id!,
-    status: 'completed',
+    status: 'Processing',
     createdAt: new Date(),
-    totalAmount: 0,
+    totalAmount: 25300,
   }).returning();
 
   // Add items to the order

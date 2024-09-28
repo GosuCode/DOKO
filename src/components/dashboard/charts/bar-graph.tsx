@@ -118,7 +118,7 @@ const chartConfig = {
     label: "Page Views",
   },
   desktop: {
-    label: "Desktop",
+    label: "Overall",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;

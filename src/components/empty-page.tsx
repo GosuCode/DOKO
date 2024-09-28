@@ -7,10 +7,13 @@ type Props = {
   pageName: string;
   btnName: string;
   link: string;
+  className?: string;
 };
-const EmptyComponent = ({ pageName, btnName, link }: Props) => {
+const EmptyComponent = ({ pageName, btnName, link, className }: Props) => {
   return (
-    <div className="space-y-8 flex flex-col items-center justify-center">
+    <div
+      className={`space-y-8 flex flex-col items-center justify-center ${className}`}
+    >
       <Image
         src="/empty-state.svg"
         width="200"

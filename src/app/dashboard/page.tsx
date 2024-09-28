@@ -1,12 +1,12 @@
-// import { BarGraph } from "@/components/dashboard/charts/bar-graph";
-// import { RecentSales } from "@/components/dashboard/recent-sales";
+import { BarGraph } from "@/components/dashboard/charts/bar-graph";
+import { RecentSales } from "@/components/dashboard/recent-sales";
 import PageContainer from "@/components/dashboard/layout/page-container";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  // CardDescription,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -53,7 +53,7 @@ export default function page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">Rs.45,231.89</div>
                   <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
@@ -137,7 +137,7 @@ export default function page() {
                 </CardContent>
               </Card>
             </div>
-            {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
               <div className="col-span-4">
                 <BarGraph />
               </div>
@@ -152,7 +152,7 @@ export default function page() {
                   <RecentSales />
                 </CardContent>
               </Card>
-            </div> */}
+            </div>
           </TabsContent>
         </Tabs>
       </div>

@@ -8,15 +8,15 @@ import EmptyComponent from "@/components/empty-page";
 
 const OrderPage = async () => {
   const order = await getOrder();
-
-  console.log(order);
   if (!order) {
     return (
       <>
+        <Header />
         <EmptyComponent
           pageName="order"
           btnName="Add to Cart"
           link="/product/product-list"
+          className="mt-24"
         />
       </>
     );

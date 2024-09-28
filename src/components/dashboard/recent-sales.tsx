@@ -16,7 +16,9 @@ export function RecentSales() {
               {product.description}
             </p>
           </div>
-          <div className="ml-auto font-medium">${product.price.toFixed(2)}</div>
+          <div className="ml-auto font-medium">
+            Rs.{product.price.toFixed(2)}
+          </div>
         </div>
       ))}
     </div>

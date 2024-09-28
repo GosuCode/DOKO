@@ -36,8 +36,8 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} />
         <Providers session={session}>
           <div>{children}</div>
-          <Toaster />
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

@@ -124,10 +124,10 @@ export async function getRecommendationsAction(userId: string) {
     userRatings,
     userId
   );
-  console.log(
-    "Recommendations for '" + userId + "':",
-    recommendations
-  );
+  // console.log(
+  //   "Recommendations for '" + userId + "':",
+  //   recommendations
+  // );
 
   return recommendations;
 }

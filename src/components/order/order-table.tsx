@@ -1,13 +1,20 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import DisplayImage from "../display-image";
 import { Input } from "../ui/input";
 import { X } from "lucide-react";
 import { ANOrdersWithOrderItems } from "@/db/schema";
+import { removeOrder } from "@/app/product/order/actions";
 
 const OrderTable = ({ order }: { order: ANOrdersWithOrderItems }) => {
   const orderItems = order.orderItems;
-  const subtotal = 85258;
+  const subtotal = orderItems.reduce((acc, item) => {
+    const discountAmount = (item.price * item.product.discount) / 100;
+    const discountedPrice = item.price - discountAmount;
+    return acc + discountedPrice * item.quantity;
+  }, 0);
   return (
     <div className="min-h-80 max-w-2xl my-4 sm:my-8 mx-auto w-full">
       <table className="mx-auto">
@@ -22,8 +29,11 @@ const OrderTable = ({ order }: { order: ANOrdersWithOrderItems }) => {
             <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4 hidden sm:table-cell">
               Price
             </th>
+            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4 hidden sm:table-cell">
+              Status
+            </th>
             <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
-              Remove
+              Cancel Order
             </th>
           </tr>
         </thead>
@@ -64,12 +74,21 @@ const OrderTable = ({ order }: { order: ANOrdersWithOrderItems }) => {
                 />
               </td>
               <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
-                <span className="text-lg">Rs.{}</span>
+                <span className="text-lg">
+                  Rs.
+                  {(
+                    item.price -
+                    (item.price * item.product.discount) / 100
+                  ).toFixed(0)}
+                </span>
+              </td>
+              <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
+                <span className="text-lg">{order.status}</span>
               </td>
               <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
                 <button
                   aria-label="delete-item"
-                  //   onClick={() => removeProductFromCart(item.productId)}
+                  onClick={() => removeOrder(item.id)}
                 >
                   <X className="w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter" />
                 </button>
