@@ -1,17 +1,20 @@
 [
-    {
-        "id": 1,
-        "image": "/product1.jpg",
-        "title": "Banner 1"
-    },
-    {
-        "id": 2,
-        "image": "/product2.jpg",
-        "title": "Banner 2"
-    },
-    {
-        "id": 3,
-        "image": "/product3.jpg",
-        "title": "Banner 3"
-    }
+  {
+    "id": 1,
+    "image": "/product1.webp",
+    "title": "Authentic Nepali Dhaka Topi",
+    "description": "Crafted by skilled artisans, representing Nepali culture."
+  },
+  {
+    "id": 2,
+    "image": "/product2.webp",
+    "title": "Traditional Doko",
+    "description": "A symbol of Nepali heritage, used for daily tasks."
+  },
+  {
+    "id": 3,
+    "image": "/product3.webp",
+    "title": "Handwoven Supo",
+    "description": "The essence of Nepali craftsmanship, perfect for home decor."
+  }
 ]

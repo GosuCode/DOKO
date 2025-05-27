@@ -10,45 +10,37 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-// import Image from "next/image";
-
 export function CarouselPlugin() {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-full h-full"
+      className="w-full h-[400px] sm:h-[500px] md:h-[500px] lg:h-[500px] overflow-hidden"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
         {carouselData.map((item) => (
           <CarouselItem key={item.id}>
-            <>
-              <Card>
-                <CardContent
-                  className="flex aspect-auto h-[500px] items-center justify-center"
-                  style={{
-                    backgroundImage: `url(${item.image})`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                  }}
-                >
-                  {/* <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={0}
-                    height={0}
-                    className="object-cover w-auto h-full"
-                    sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
-                  /> */}
-                </CardContent>
-              </Card>
-            </>
+            <Card className="relative w-full h-full overflow-hidden rounded-lg shadow-md">
+              <CardContent
+                className="relative flex items-end justify-start w-full h-[400px] sm:h-[500px] md:h-[500px] lg:h-[500px] p-6 bg-cover bg-center transition-transform duration-300 hover:scale-105"
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-black/40 z-10" />
+                <div className="relative z-20 text-white">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                    {item.title}
+                  </h2>
+                  <p className="text-sm md:text-base">{item.description}</p>
+                </div>
+              </CardContent>
+            </Card>
           </CarouselItem>
         ))}
       </CarouselContent>
