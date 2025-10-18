@@ -25,7 +25,7 @@ export default async function Home() {
           Check out our latest and most popular items
         </p>
       </div>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 sm:space-x-2 space-y-4 mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12 px-4">
         <AllProducts allProducts={allProducts} />
       </div>
       <Footer />

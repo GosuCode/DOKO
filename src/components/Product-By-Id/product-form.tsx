@@ -1,12 +1,30 @@
-"use client";
-
 import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { createCartAction } from "@/app/product/[productId]/actions";
 import toast, { Toaster } from "react-hot-toast";
+import { auth } from "@/auth";
+import SignIn from "../sign-in";
 
-function ProductForm({ productId }: { productId: number }) {
+async function ProductForm({ productId }: { productId: number }) {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    return (
+      <div className="w-full">
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Sign in to add to cart
+          </h3>
+          <p className="text-gray-600 text-sm mb-4">
+            Please sign in to add items to your cart and make purchases.
+          </p>
+          <SignIn />
+        </div>
+      </div>
+    );
+  }
+
   const handleSubmit = (formData: FormData) => {
     createCartAction(productId, formData);
     toast.success("Added to cart successfully.");
