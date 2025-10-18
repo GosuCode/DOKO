@@ -4,16 +4,18 @@ import { getSingleProductAction } from "../actions";
 import EditProduct from "@/components/edit-product";
 
 type EditProductPageProps = {
-  params: { productId: number };
+  params: Promise<{ productId: string }>;
 };
-const EditProductPage = async ({
-  params: { productId },
-}: EditProductPageProps) => {
-  const product = await getSingleProductAction(productId);
+const EditProductPage = async ({ params }: EditProductPageProps) => {
+  const { productId } = await params;
+  const product = await getSingleProductAction(parseInt(productId));
 
   return (
     <div className="container">
-      <EditProduct productId={productId} product={product[0] as ANProduct} />
+      <EditProduct
+        productId={parseInt(productId)}
+        product={product[0] as ANProduct}
+      />
     </div>
   );
 };

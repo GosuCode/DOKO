@@ -12,11 +12,20 @@ export default async function Home() {
     <main className="mt-16 container mx-auto py-12">
       <Header />
       <Banner />
+      {/* <h2>Shop by Category</h2>
+      <p>
+        Find the perfect product for your needs from our curated collections
+      </p> */}
       <RecommendationPage />
-      <h1 className="ml-10 sm:ml-4 text-left text-2xl sm:text-4xl font-bold mt-14 underline">
-        Explore the Products
-      </h1>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 sm:space-x-2 space-y-4 mt-12">
+      <div className="text-center">
+        <h2 className="ml-10 sm:ml-4 text-2xl sm:text-4xl font-bold mt-14">
+          Featured Products
+        </h2>
+        <p className="text-slate-500">
+          Check out our latest and most popular items
+        </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12 px-4">
         <AllProducts allProducts={allProducts} />
       </div>
       <Footer />

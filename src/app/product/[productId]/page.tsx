@@ -5,11 +5,10 @@ import { ANProduct, products } from "@/db/schema";
 import Header from "@/app/header";
 
 type ProductPageProps = {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 };
-export default async function ProductPage({
-  params: { productId },
-}: ProductPageProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { productId } = await params;
   const product = await database.query.products.findFirst({
     where: eq(products.id, parseInt(productId)),
   });
