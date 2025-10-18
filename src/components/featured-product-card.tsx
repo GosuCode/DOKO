@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +14,8 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { useSession } from "next-auth/react";
 
 import type { ANProduct } from "@/db/schema";
 import { cn } from "@/lib/utils";
@@ -32,6 +36,8 @@ export default function FeaturedProductCard({
   isFeatured = false,
   isTrending = false,
 }: FeaturedProductCardProps) {
+  const { data: session } = useSession();
+  const { toast } = useToast();
   const subtotal = Math.round(
     product.price - (product.price * product.discount) / 100
   );
@@ -181,7 +187,17 @@ export default function FeaturedProductCard({
           size="lg"
           className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105"
           disabled={!onSwitch || product.quantity === 0}
-          onClick={() => onSwitch?.()}
+          onClick={() => {
+            if (!session?.user) {
+              toast({
+                title: "Login Required",
+                description: "Please sign in to add items to your cart.",
+                variant: "destructive",
+              });
+              return;
+            }
+            onSwitch?.();
+          }}
         >
           {isAddedToCart ? (
             <>
