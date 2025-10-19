@@ -1,103 +1,169 @@
 "use client";
 
-import { X } from "lucide-react";
+import { X, Plus, Minus, Heart } from "lucide-react";
 import Link from "next/link";
 import { ANCartWithProduct } from "@/db/schema";
 import DisplayImage from "../display-image";
-import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import { removeProductFromCart } from "@/app/product/cart/actions";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 function CartTable({ cart }: { cart: ANCartWithProduct[] }) {
-  const cartItems = cart.map((item: ANCartWithProduct) => ({
-    ...item,
-  }));
-  const subtotal = cartItems.reduce((total, item) => {
-    const itemPrice = item.subtotal;
-    return total + itemPrice * Number(item.quantity);
-  }, 0);
+  const { toast } = useToast();
+  const [quantities, setQuantities] = useState<Record<number, number>>(
+    cart.reduce(
+      (acc, item) => ({ ...acc, [item.productId]: item.quantity }),
+      {}
+    )
+  );
+
+  const handleRemoveItem = async (productId: number) => {
+    try {
+      await removeProductFromCart(productId);
+      toast({
+        title: "Item removed",
+        description: "Product has been removed from your cart.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to remove item from cart.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleQuantityChange = (productId: number, newQuantity: number) => {
+    if (newQuantity < 1) return;
+    setQuantities((prev) => ({ ...prev, [productId]: newQuantity }));
+  };
 
   return (
-    <div className="min-h-80 max-w-2xl my-4 sm:my-8 mx-auto w-full">
-      <table className="mx-auto">
-        <thead>
-          <tr className="uppercase text-xs sm:text-sm text-palette-primary border-b border-palette-light">
-            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
-              Product
-            </th>
-            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
-              Quantity
-            </th>
-            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4 hidden sm:table-cell">
-              Price
-            </th>
-            <th className="font-primary font-normal px-0 py-0 sm:px-6 sm:py-4">
-              Remove
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-palette-lighter">
-          {cartItems.map((item) => (
-            <tr
-              key={item.id}
-              className="text-sm sm:text-base text-gray-600 text-center"
+    <div className="space-y-4">
+      {cart.map((item) => (
+        <div
+          key={item.id}
+          className="flex items-center gap-4 p-4 bg-white/50 rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200"
+        >
+          {/* Product Image */}
+          <Link href={`/product/${item.productId}`} className="flex-shrink-0">
+            <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
+              <DisplayImage
+                public_id={item.products.image}
+                alt={item.products.name}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+              />
+            </div>
+          </Link>
+
+          {/* Product Info */}
+          <div className="flex-1 min-w-0">
+            <Link
+              href={`/product/${item.productId}`}
+              className="block hover:text-amber-600 transition-colors duration-200"
             >
-              <td className="font-primary font-medium px-4 sm:px-6 py-4 flex items-center">
-                <figure className="relative h-20 w-20">
-                  <Link href={`/product/${item.productId}`}>
-                    <DisplayImage
-                      public_id={item.products.image}
-                      alt={item.products.name}
-                      className="h-full"
-                    />
-                  </Link>
-                </figure>
-                <Link
-                  href={`/product/${item.productId}`}
-                  className="pt-1 hover:text-palette-dark"
-                >
-                  {item.products.name}
-                </Link>
-              </td>
-              <td className="font-primary font-medium px-4 sm:px-6 py-4">
-                <Input
-                  type="number"
-                  inputMode="numeric"
-                  id="variant-quantity"
-                  name="variant-quantity"
-                  min="1"
-                  step="1"
-                  max={10}
-                  defaultValue={item.quantity}
-                  className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
-                />
-              </td>
-              <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
-                <span className="text-lg">Rs.{item.subtotal}</span>
-              </td>
-              <td className="font-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
-                <button
-                  aria-label="delete-item"
-                  onClick={() => removeProductFromCart(item.productId)}
-                >
-                  <X className="w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter" />
-                </button>
-              </td>
-            </tr>
-          ))}
-          {subtotal === 0 ? null : (
-            <tr className="text-center">
-              <td></td>
-              <td className="font-primary text-base text-gray-600 font-semibold uppercase px-0 py-0 sm:px-6 sm:py-4">
-                Subtotal
-              </td>
-              <td className="font-primary text-lg text-palette-primary font-medium px-0 py-0 sm:px-6 sm:py-4">
-                <span className="text-xl">Rs.{subtotal.toFixed(2)}</span>
-              </td>
-              <td></td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              <h3 className="font-semibold text-gray-800 text-lg line-clamp-2 mb-1">
+                {item.products.name}
+              </h3>
+            </Link>
+
+            <div className="flex items-center gap-2 mb-2">
+              <Badge
+                variant="secondary"
+                className="bg-amber-100 text-amber-800 text-xs"
+              >
+                {item.products.categories}
+              </Badge>
+              {item.products.discount > 0 && (
+                <Badge variant="destructive" className="text-xs">
+                  {item.products.discount}% OFF
+                </Badge>
+              )}
+            </div>
+
+            <div className="flex items-center gap-4 text-sm text-gray-600">
+              <span>Stock: {item.products.quantity}</span>
+              <span>•</span>
+              <span>SKU: #{item.productId}</span>
+            </div>
+          </div>
+
+          {/* Quantity Controls */}
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8"
+              onClick={() =>
+                handleQuantityChange(
+                  item.productId,
+                  quantities[item.productId] - 1
+                )
+              }
+              disabled={quantities[item.productId] <= 1}
+            >
+              <Minus className="h-3 w-3" />
+            </Button>
+            <span className="w-8 text-center font-medium">
+              {quantities[item.productId]}
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8"
+              onClick={() =>
+                handleQuantityChange(
+                  item.productId,
+                  quantities[item.productId] + 1
+                )
+              }
+              disabled={quantities[item.productId] >= item.products.quantity}
+            >
+              <Plus className="h-3 w-3" />
+            </Button>
+          </div>
+
+          {/* Price */}
+          <div className="text-right min-w-0">
+            <div className="text-lg font-bold text-gray-800">
+              Rs.{" "}
+              {(item.subtotal * quantities[item.productId]).toLocaleString()}
+            </div>
+            {item.products.discount > 0 && (
+              <div className="text-sm text-gray-500 line-through">
+                Rs.{" "}
+                {(
+                  item.products.price * quantities[item.productId]
+                ).toLocaleString()}
+              </div>
+            )}
+            <div className="text-xs text-gray-500">
+              Rs. {item.subtotal.toLocaleString()} each
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 text-gray-400 hover:text-red-500 hover:border-red-200"
+            >
+              <Heart className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 text-gray-400 hover:text-red-500 hover:border-red-200"
+              onClick={() => handleRemoveItem(item.productId)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -29,7 +29,7 @@ export default async function ProductDetails({
     );
   }
   return (
-    <div className="flex flex-col justify-between h-full w-full md:w-1/2 max-w-xs mx-auto space-y-4 min-h-128">
+    <div className="space-y-8">
       <BackToProductButton />
       <ProductInfo
         title={product.name}

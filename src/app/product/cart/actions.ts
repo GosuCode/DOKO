@@ -7,18 +7,18 @@ import { database } from "@/db/database";
 import { revalidatePath } from "next/cache";
 
 export async function showCartProducts() {
-    const session = await auth();
+  const session = await auth();
 
   if (!session || !session.user) {
     throw new Error("Unauthorized")
   }
 
   const cartProducts: ANCartWithProduct[] = await database.query.cart.findMany({
-      where: eq(cart.userId, session.user.id!),
-      with: {
-        products: true
-      },
-    });
+    where: eq(cart.userId, session.user.id!),
+    with: {
+      products: true
+    },
+  });
 
   return cartProducts;
 }
@@ -29,10 +29,14 @@ export async function removeProductFromCart(productId: number) {
   if (!session || !session.user) {
     throw new Error("Unauthorized")
   }
-  
+
   await database.delete(cart).where(and(eq(cart.userId, session.user.id!), eq(cart.productId, productId)))
 
   revalidatePath("/product/cart")
+
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('cartUpdated'));
+  }
 }
 
 export async function checkout(cartItemIds: number[]) {
@@ -41,7 +45,7 @@ export async function checkout(cartItemIds: number[]) {
   if (!session || !session.user) {
     throw new Error("Unauthorized");
   }
-  
+
   let cartItems;
   if (cartItemIds) {
     cartItems = await database.query.cart.findMany({
@@ -83,10 +87,13 @@ export async function checkout(cartItemIds: number[]) {
     }))
   );
 
-  // Clear the user's cart
   await database.delete(cart).where(eq(cart.userId, session.user.id!));
 
   revalidatePath("/product/cart");
+
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('cartUpdated'));
+  }
 
   return { success: true, orderId: newOrder.id };
 }

@@ -7,38 +7,56 @@ import { and, eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
 export async function createCartAction(productId: number, formData: FormData) {
-  const session = await auth()
-  if (!session || !session.user || !session.user.id) {
-    throw new Error("Unauthorized")
+  try {
+    const session = await auth()
+    if (!session || !session.user || !session.user.id) {
+      throw new Error("Unauthorized")
+    }
+
+    const product = await database.query.products.findFirst({
+      where: eq(products.id, productId),
+    })
+
+    if (!product) {
+      throw new Error("Product not found")
+    }
+
+    const quantity = Number(formData.get("quantity"))
+    if (isNaN(quantity) || quantity <= 0) {
+      throw new Error("Invalid quantity")
+    }
+
+    if (product.quantity < quantity) {
+      throw new Error("Not enough stock available")
+    }
+
+    const subtotal = product.price * quantity - (product.price * product.discount / 100);
+
+    await database.insert(cart).values({
+      userId: session.user.id,
+      productId,
+      quantity,
+      subtotal: subtotal,
+    })
+
+    await database.update(products).set({
+      quantity: product.quantity - quantity,
+    }).where(eq(products.id, productId))
+
+    revalidatePath(`/product/${productId}`)
+    revalidatePath("/cart")
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
+    }
+
+    return { success: true, message: "Added to cart successfully!" }
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Failed to add to cart"
+    }
   }
-
-  const product = await database.query.products.findFirst({
-    where: eq(products.id, productId),
-  })
-
-  if (!product) {
-    throw new Error("Product not found")
-  }
-
-  const quantity = Number(formData.get("quantity"))
-  if (isNaN(quantity) || quantity <= 0) {
-    throw new Error("Invalid quantity")
-  }
-
-  const subtotal = product.price * quantity - (product.price * product.discount / 100);
-
-  await database.insert(cart).values({
-    userId: session.user.id,
-    productId,
-    quantity,
-    subtotal: subtotal,
-  })
-
-  await database.update(products).set({
-    quantity: product.quantity - quantity,
-  }).where(eq(products.id, productId))
-  
-  revalidatePath(`/product/${productId}`)
 }
 
 

@@ -8,20 +8,24 @@ import EmptyComponent from "@/components/empty-page";
 const ProductListPage = async () => {
   const allProducts: ANProduct[] = await getProducts();
 
-  if (!allProducts) {
+  if (!allProducts || allProducts.length === 0) {
     return (
-      <EmptyComponent
-        pageName="list"
-        btnName="List new Proudct"
-        link="/dashboard/products/create"
-      />
+      <>
+        <Header />
+        <EmptyComponent
+          pageName="list"
+          btnName="List new Product"
+          link="/dashboard/products/create"
+        />
+      </>
     );
   }
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       <Header />
       <ProductWithSidebar allProducts={allProducts} />
-    </>
+    </div>
   );
 };
 

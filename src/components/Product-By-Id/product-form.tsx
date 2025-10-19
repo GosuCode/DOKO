@@ -1,13 +1,18 @@
+"use client";
+
 import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { createCartAction } from "@/app/product/[productId]/actions";
-import toast, { Toaster } from "react-hot-toast";
-import { auth } from "@/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { useSession } from "next-auth/react";
 import SignIn from "../sign-in";
+import { useTransition } from "react";
 
-async function ProductForm({ productId }: { productId: number }) {
-  const session = await auth();
+function ProductForm({ productId }: { productId: number }) {
+  const { data: session } = useSession();
+  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
   if (!session || !session.user) {
     return (
@@ -25,37 +30,56 @@ async function ProductForm({ productId }: { productId: number }) {
     );
   }
 
-  const handleSubmit = (formData: FormData) => {
-    createCartAction(productId, formData);
-    toast.success("Added to cart successfully.");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(async () => {
+      const result = await createCartAction(productId, formData);
+
+      if (result.success) {
+        toast({
+          title: "Success",
+          description: result.message,
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    });
   };
 
   return (
-    <>
-      <Toaster />
-      <form action={handleSubmit} className="w-full">
-        <div className="flex justify-start space-x-2 w-full">
-          <div className="flex flex-col items-start space-y-1 flex-grow-0">
-            <label className="text-gray-500 text-base">Qty.</label>
-            <Input
-              type="number"
-              inputMode="numeric"
-              id="quantity"
-              name="quantity"
-              min="1"
-              step="1"
-              max={10}
-              defaultValue={1}
-              className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
-            />
-          </div>
+    <form onSubmit={handleSubmit} className="w-full">
+      <div className="flex justify-start space-x-2 w-full">
+        <div className="flex flex-col items-start space-y-1 flex-grow-0">
+          <label className="text-gray-500 text-base">Qty.</label>
+          <Input
+            type="number"
+            inputMode="numeric"
+            id="quantity"
+            name="quantity"
+            min="1"
+            step="1"
+            max={10}
+            defaultValue={1}
+            className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
+          />
         </div>
-        <Button className="w-full mt-4" aria-label="cart-button">
-          Add To Cart
-          <ShoppingCart className="w-5 ml-2" />
-        </Button>
-      </form>
-    </>
+      </div>
+      <Button
+        type="submit"
+        className="w-full mt-4"
+        aria-label="cart-button"
+        disabled={isPending}
+      >
+        {isPending ? "Adding..." : "Add To Cart"}
+        <ShoppingCart className="w-5 ml-2" />
+      </Button>
+    </form>
   );
 }
 
