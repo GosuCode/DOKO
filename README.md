@@ -1,4 +1,4 @@
-# 🏺 Artisan Nepal - Handmade Crafts E-commerce Platform
+# Artisan Nepal - Handmade Crafts E-commerce Platform
 
 A modern, responsive e-commerce platform showcasing authentic Nepalese handmade crafts and connecting customers with skilled artisans across Nepal.
 
@@ -30,7 +30,7 @@ A modern, responsive e-commerce platform showcasing authentic Nepalese handmade 
 
 ![Product Showcase](/public/readme/AN%20-%20Product%20Showcase.webp)
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### **Frontend**
 
@@ -121,7 +121,7 @@ npm run db:push
 6. **Open in Browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 📱 Screenshots
+## Screenshots
 
 ### Homepage
 
@@ -139,7 +139,7 @@ npm run db:push
 
 ![Dashboard](/public/readme/AN%20-%20dashboard.webp)
 
-## 🛠️ Available Scripts
+## Available Scripts
 
 ```bash
 # Development
@@ -156,7 +156,7 @@ npm run lint         # Run ESLint
 npm run lint:fix     # Fix ESLint errors
 ```
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Using Docker Compose
 
@@ -221,7 +221,7 @@ We welcome contributions!
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
